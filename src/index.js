@@ -1,14 +1,12 @@
 import './style.css';
-
-const header = () => {
-    const container = document.createElement('div');
-    container.innerText = "HELLO WEBPACK"
-
-    return container
-}
+import { initialUi } from './modules/ui';
+import { taskFactory,categoryFactory } from './modules/factory';
+import { createModal } from './modules/ui';
 
 
-document.body.appendChild(header())
+const container = document.querySelector('main');
+container.appendChild(createModal())
 
 
-console.log('hello')
+
+

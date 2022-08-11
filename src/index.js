@@ -1,25 +1,23 @@
 import './style.css';
-import { initialUi } from './modules/ui';
-import { displayProjects } from './modules/functions';
+import { 
+    initialUi, 
+    projectModal 
+} from './modules/ui';
+import { 
+    displayProjects,
+    toggleProjInpt,
+    makeFalse 
+} from './modules/functions';
+import { categoryFactory,taskFactory } from './modules/factory';
+
+
 
 displayProjects()
 
-/*
 
-const createTask = document.getElementById('task_submit');
-//createTask.addEventListener('click',())
-
+const task = document.getElementById('task_button')
+task.addEventListener('click',makeFalse)
 
 
-const projContainer = document.querySelector('.proj_nav_container')
-const createProject = document.querySelector('#add_Project_Btn')
-createProject.addEventListener('click',addProject);
-
-const projInpt = document.createElement('input')
-projInpt.id = 'proj_input'
-
-const createProject = document.querySelector('#add_Project_Btn')
-createProject.addEventListener('click',() =>{
-    
-});
-*/
+const newProject = document.getElementById('add_Project_Btn');
+newProject.addEventListener('click', toggleProjInpt)

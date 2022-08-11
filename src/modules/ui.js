@@ -1,26 +1,5 @@
-const initialUi = (() => {
-    const header = document.createElement('header');
-    const nav = buildNav()
-    const main = document.createElement('main');
 
-    //add event listener to make Modal Form.
-    const taskButton = document.createElement('button')
-    taskButton.innerText = 'New Task';
-    taskButton.id = 'task_button'
-
-    main.appendChild(taskButton)
-
-
-
-
-    const footer = document.createElement('footer');
-
-    document.body.append(header,nav,main,footer)
-})();
-
-
-
-function navProjButton(name){
+const navProjButton = (name) => {
     const projButton = document.createElement('button')
     projButton.innerText = name;
     projButton.classList.add('nav_pro_btn')
@@ -30,7 +9,7 @@ function navProjButton(name){
     
 }
 
-function buildNav(){
+const buildNav = () => {
     const nav = document.createElement('nav')
     const title = document.createElement('h3')
     title.innerText = 'Projects'
@@ -47,7 +26,7 @@ function buildNav(){
     return nav
 }
 
-function createModal(){
+const createModal = () => {
     const form = document.createElement('div')
     form.name = 'task-form'
 
@@ -77,12 +56,49 @@ function createModal(){
     return form
 }
 
+const projectModal = () => {
+    const modalContainer = document.createElement('div')
+    modalContainer.classList.add('project_modal')
+
+    const projName = document.createElement('input');
+    projName.id = 'proj_Name_Inpt';
+    projName.name = 'project_Name_Inpt';
+    
+    const addProjBtn = document.createElement('button')
+    addProjBtn.id = 'add_Proj_Button'
+    addProjBtn.innerText = 'Add'
+
+    modalContainer.append(
+        projName,
+        addProjBtn
+    )
+    return modalContainer
+}
+
+const initialUi = (() => {
+    const header = document.createElement('header');
+    const nav = buildNav()
+    const main = document.createElement('main');
+
+    //add event listener to make Modal Form.
+    const taskButton = document.createElement('button')
+    taskButton.innerText = 'New Task';
+    taskButton.id = 'task_button'
+
+    main.appendChild(taskButton)
 
 
+
+
+    const footer = document.createElement('footer');
+
+    document.body.append(header,nav,main,footer)
+})();
 
 
 export{
     initialUi,
     createModal,
-    navProjButton
+    navProjButton,
+    projectModal
 }

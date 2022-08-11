@@ -5,11 +5,19 @@ const taskFactory = (name,desc,date) => {
     const setDesc = (newDesc) => {
         desc = newDesc;
     }
+
     const setDate = (newDate) => date = newDate
     
     const getDate = () => date
 
-    return {status,getDesc,getDate,getName,setDesc}
+    return {
+        status,
+        getDesc,
+        setDesc,
+        getDate,
+        setDate,
+        getName
+    }
 }
 
 const categoryFactory = (name) => {
@@ -24,7 +32,11 @@ const categoryFactory = (name) => {
     return {taskStorage,getName,pushTask}
 }
 
+
+
+
 export{
     taskFactory,
     categoryFactory
 }
+

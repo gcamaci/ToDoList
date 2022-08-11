@@ -1,20 +1,14 @@
 const initialUi = (() => {
     const header = document.createElement('header');
-    const nav = document.createElement('nav')
-
-
-
-    
+    const nav = buildNav()
     const main = document.createElement('main');
-
 
     //add event listener to make Modal Form.
     const taskButton = document.createElement('button')
     taskButton.innerText = 'New Task';
+    taskButton.id = 'task_button'
 
-    
-
-    main.append(taskButton)
+    main.appendChild(taskButton)
 
 
 
@@ -26,11 +20,35 @@ const initialUi = (() => {
 
 
 
+function navProjButton(name){
+    const projButton = document.createElement('button')
+    projButton.innerText = name;
+    projButton.classList.add('nav_pro_btn')
+
+
+    return projButton
+    
+}
+
+function buildNav(){
+    const nav = document.createElement('nav')
+    const title = document.createElement('h3')
+    title.innerText = 'Projects'
+    
+    const newProject = document.createElement('button')
+    newProject.innerText = 'New Project'
+    newProject.id = 'add_Project_Btn'
+
+    const projectContainer = document.createElement('div')
+    projectContainer.classList.add('proj_nav_container');
+
+    nav.append(title,newProject,projectContainer)
+
+    return nav
+}
 
 function createModal(){
     const form = document.createElement('div')
-    //form.method = 'post'
-    //form.action = ''
     form.name = 'task-form'
 
     const nameInput = document.createElement('input');
@@ -54,19 +72,17 @@ function createModal(){
     submit.innerText = 'Add'
 
 
-    submit.addEventListener('click',()=>{
-        console.log(nameInput.value, dateInput.value);
-        //const main = document.querySelector('main');
-        //main.innerHTML = ''
-    });
-
-
     form.append(nameInput,descInput,dateInput,submit);
 
     return form
 }
 
+
+
+
+
 export{
     initialUi,
-    createModal
+    createModal,
+    navProjButton
 }

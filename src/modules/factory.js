@@ -1,4 +1,4 @@
-const taskFactory = (name,desc,date) => {
+const TaskFactory = (name,desc,date) => {
     let status = false;
     const getDesc = () => desc
     const getName = () => name
@@ -20,7 +20,7 @@ const taskFactory = (name,desc,date) => {
     }
 }
 
-const categoryFactory = (name) => {
+const CategoryFactory = (name) => {
     let taskStorage = [];
 
     const pushTask = (task) => {
@@ -36,7 +36,7 @@ const categoryFactory = (name) => {
 
 
 export{
-    taskFactory,
-    categoryFactory
+    TaskFactory,
+    CategoryFactory
 }
 

@@ -1,9 +1,10 @@
+import { addProject,toggleProjInpt } from "./nav";
+import {toggleTaskForm} from "./tasks"
 
 const navProjButton = (name) => {
     const projButton = document.createElement('button')
     projButton.innerText = name;
     projButton.classList.add('nav_pro_btn')
-
 
     return projButton
     
@@ -17,6 +18,7 @@ const buildNav = () => {
     const newProject = document.createElement('button')
     newProject.innerText = 'New Project'
     newProject.id = 'add_Project_Btn'
+    newProject.addEventListener('click', toggleProjInpt)
 
     const projectContainer = document.createElement('div')
     projectContainer.classList.add('proj_nav_container');
@@ -26,9 +28,10 @@ const buildNav = () => {
     return nav
 }
 
-const createModal = () => {
+const taskModal = () => {
     const form = document.createElement('div')
     form.name = 'task-form'
+    form.id = 'task_Modal'
 
     const nameInput = document.createElement('input');
     nameInput.setAttribute('type','text');
@@ -43,7 +46,9 @@ const createModal = () => {
     const dateInput = document.createElement('input');
     dateInput.setAttribute('type','date');
     dateInput.setAttribute('name', 'date');
-    dateInput.setAttribute('id','date_input')
+    dateInput.setAttribute('id','date_input');
+
+    
 
     const submit = document.createElement('button');
     submit.setAttribute('id','task_submit')
@@ -68,6 +73,9 @@ const projectModal = () => {
     addProjBtn.id = 'add_Proj_Button'
     addProjBtn.innerText = 'Add'
 
+    
+    addProjBtn.addEventListener('click',addProject)
+
     modalContainer.append(
         projName,
         addProjBtn
@@ -84,21 +92,18 @@ const initialUi = (() => {
     const taskButton = document.createElement('button')
     taskButton.innerText = 'New Task';
     taskButton.id = 'task_button'
+    taskButton.addEventListener('click',toggleTaskForm)
 
     main.appendChild(taskButton)
-
-
-
-
     const footer = document.createElement('footer');
-
     document.body.append(header,nav,main,footer)
 })();
 
 
 export{
     initialUi,
-    createModal,
+    taskModal,
     navProjButton,
-    projectModal
+    projectModal,
+   
 }

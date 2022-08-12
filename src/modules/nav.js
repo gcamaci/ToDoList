@@ -1,7 +1,7 @@
-import { taskFactory,categoryFactory } from "./factory";
+import {CategoryFactory } from "./factory";
 import { navProjButton,projectModal } from "./ui";
-const gym = categoryFactory('Gym');
-const coding = categoryFactory('Coding')
+const gym = CategoryFactory('Gym');
+const coding = CategoryFactory('Coding')
 let projects = [gym,coding]
 let toggle = false
 
@@ -17,10 +17,6 @@ const  displayProjects = () =>{
    
 }
 
-function makeFalse(){
-    toggle = !toggle
-    console.log(toggle)
-}
 const toggleProjInpt = () =>{
     const nav = document.querySelector('nav')
     if(toggle===false){
@@ -32,21 +28,24 @@ const toggleProjInpt = () =>{
     toggle = !toggle
     console.log(toggle)
 }
-/*
-function addTask(){
-    const name = document.getElementById('name_input').value;
-    const desc = document.getElementById('desc_input').value;
-    const date = document.getElementById('date_input').value;
-
-    let newTask = taskFactory(name,desc,date);
 
 
+const addProject = () => {
+    const projInput = document.getElementById('proj_Name_Inpt');
+    let newProject = CategoryFactory(projInput.value);
+    projects.push(newProject)
+    toggleProjInpt()
+    displayProjects()
+    projInput.value = ''
+
+    console.log(projects)
 }
-*/
+
+
 
 export{
     displayProjects,
     projects,
     toggleProjInpt,
-    makeFalse
+    addProject
 }

@@ -1,14 +1,13 @@
 import './style.css';
 import { 
-    initialUi,mainModal
+    UI
 } from './modules/ui';
 import { 
-    displayProjects,projects
+    displayProjects
 } from './modules/nav';
 
 
-
-
+UI.loadpage()
 
 displayProjects()
 

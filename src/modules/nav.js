@@ -1,13 +1,13 @@
 import {CategoryFactory } from "./factory";
-import { navProjButton,projectModal,taskModal,mainModal } from "./ui";
-const gym = CategoryFactory('Gym');
-const coding = CategoryFactory('Coding')
-let projects = [gym,coding]
+import {UI } from "./ui";
+const Gym = CategoryFactory('Gym');
+const Coding = CategoryFactory('Coding')
+let projects = [Gym,Coding]
 let toggle = false
 
 const toggleModal = () => {
     if(toggle === false){
-        document.body.appendChild(mainModal())
+        document.body.appendChild(UI.buildModal())
     }else{
         const modal = document.querySelector('.master_Modal_Container')
         document.body.removeChild(modal) 
@@ -19,9 +19,7 @@ const  displayProjects = () =>{
     const container = document.querySelector('.proj_nav_container')
     container.innerHTML = ''
     projects.forEach((project)=>{
-        container.appendChild(navProjButton(project.getName()))
-        
-
+        container.appendChild(UI.createNavButton(project.getName()))
     });
    
 }
@@ -30,13 +28,12 @@ function displayForms(event){
     container.innerHTML = ''
 
     if(event.target.id === 'new_Project'){
-        container.appendChild(projectModal())
+        container.appendChild(UI.buildProjectForm())
     }else{
-        container.appendChild(taskModal())
+        container.appendChild(UI.buildTaskForm())
     }
    
 }
-
 const addProject = () => {
     const projInput = document.getElementById('proj_Name_Inpt');
     let newProject = CategoryFactory(projInput.value);
@@ -46,8 +43,6 @@ const addProject = () => {
 
     console.log(projects)
 }
-
-
 
 export{
     displayProjects,

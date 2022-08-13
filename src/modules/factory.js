@@ -3,12 +3,8 @@ const TaskFactory = (name,desc,date,category) => {
     const getDesc = () => desc
     const getName = () => name
     const getCategory = () => category
-    const setDesc = (newDesc) => {
-        desc = newDesc;
-    }
-
+    const setDesc = (newDesc) => desc = newDesc
     const setDate = (newDate) => date = newDate
-    
     const getDate = () => date
 
     return {

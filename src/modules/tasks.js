@@ -1,21 +1,31 @@
 import { projects } from "./nav";
 import { TaskFactory } from "./factory"
-import {projectModal, taskModal} from "./ui"
+import {GiveDomInpts, taskModal} from "./ui"
 
 
-let toggle = false;
 
-const toggleTaskForm = () => {
-    const main = document.querySelector('main')
-    const taskForm = document.getElementById('task_Modal')
-    if(toggle === false){
-        main.appendChild(taskModal())
-    }else{
-        main.removeChild(taskForm)
-    }
-    toggle = !toggle 
+
+
+const addTaskToProj = () =>{
+    const DOM = GiveDomInpts();
+
+    let newTask = TaskFactory(
+        DOM.taskName.value,
+        DOM.taskDesc.value,
+        DOM.taskDate.value,
+        DOM.taskCategory.value
+    )
+    
+    projects.forEach((project)=>{
+        if(project.getName() === newTask.getCategory()){
+            project.pushTask(newTask);
+            console.log(project.taskStorage)
+        }
+    });
+   
+
 }
-
 export {
-    toggleTaskForm
+
+    addTaskToProj
 }

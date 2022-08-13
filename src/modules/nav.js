@@ -1,40 +1,46 @@
 import {CategoryFactory } from "./factory";
-import { navProjButton,projectModal } from "./ui";
+import { navProjButton,projectModal,taskModal,mainModal } from "./ui";
 const gym = CategoryFactory('Gym');
 const coding = CategoryFactory('Coding')
 let projects = [gym,coding]
 let toggle = false
 
-
+const toggleModal = () => {
+    if(toggle === false){
+        document.body.appendChild(mainModal())
+    }else{
+        const modal = document.querySelector('.master_Modal_Container')
+        document.body.removeChild(modal) 
+    }
+    toggle = !toggle
+}
 //Nav controlls and functions
 const  displayProjects = () =>{
     const container = document.querySelector('.proj_nav_container')
     container.innerHTML = ''
     projects.forEach((project)=>{
         container.appendChild(navProjButton(project.getName()))
+        
 
     });
    
 }
+function displayForms(event){
+    const container = document.getElementById('modal_Forms');
+    container.innerHTML = ''
 
-const toggleProjInpt = () =>{
-    const nav = document.querySelector('nav')
-    if(toggle===false){
-        nav.appendChild(projectModal())
+    if(event.target.id === 'new_Project'){
+        container.appendChild(projectModal())
     }else{
-        const remove = document.querySelector('.project_modal')
-        nav.removeChild(remove)
+        container.appendChild(taskModal())
     }
-    toggle = !toggle
-    console.log(toggle)
+   
 }
-
 
 const addProject = () => {
     const projInput = document.getElementById('proj_Name_Inpt');
     let newProject = CategoryFactory(projInput.value);
     projects.push(newProject)
-    toggleProjInpt()
     displayProjects()
     projInput.value = ''
 
@@ -46,6 +52,7 @@ const addProject = () => {
 export{
     displayProjects,
     projects,
-    toggleProjInpt,
-    addProject
+    addProject,
+    displayForms,
+    toggleModal
 }

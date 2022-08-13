@@ -1,10 +1,11 @@
 import './style.css';
 import { 
-    initialUi
+    initialUi,mainModal
 } from './modules/ui';
 import { 
-    displayProjects,
+    displayProjects,projects
 } from './modules/nav';
+
 
 
 

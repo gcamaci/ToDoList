@@ -1,7 +1,8 @@
-const TaskFactory = (name,desc,date) => {
+const TaskFactory = (name,desc,date,category) => {
     let status = false;
     const getDesc = () => desc
     const getName = () => name
+    const getCategory = () => category
     const setDesc = (newDesc) => {
         desc = newDesc;
     }
@@ -16,7 +17,8 @@ const TaskFactory = (name,desc,date) => {
         setDesc,
         getDate,
         setDate,
-        getName
+        getName,
+        getCategory
     }
 }
 

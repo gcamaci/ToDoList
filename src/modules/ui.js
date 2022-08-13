@@ -1,5 +1,7 @@
-import { addProject,toggleProjInpt } from "./nav";
-import {toggleTaskForm} from "./tasks"
+import { addProject,displayForms,displayPro, toggleModal } from "./nav";
+import { addTaskToProj } from "./tasks";
+
+
 
 const navProjButton = (name) => {
     const projButton = document.createElement('button')
@@ -15,28 +17,44 @@ const buildNav = () => {
     const title = document.createElement('h3')
     title.innerText = 'Projects'
     
-    const newProject = document.createElement('button')
-    newProject.innerText = 'New Project'
-    newProject.id = 'add_Project_Btn'
-    newProject.addEventListener('click', toggleProjInpt)
 
     const projectContainer = document.createElement('div')
     projectContainer.classList.add('proj_nav_container');
 
-    nav.append(title,newProject,projectContainer)
+    const addModal = document.createElement('button')
+    addModal.innerText = '+'
+    addModal.id = 'open_Modal'
+    addModal.addEventListener('click',toggleModal)
+    
+    //toggle tast listener goes on this button^
+
+    nav.append(title,projectContainer,addModal)
 
     return nav
 }
 
+const GiveDomInpts = () => {
+    const taskName = document.getElementById('name_input')
+    const taskDesc = document.getElementById('desc_input')
+    const taskDate = document.getElementById('date_input')
+    const taskCategory = document.getElementById('project_Assign')
+
+    return {
+        taskName,
+        taskDesc,
+        taskDate,
+        taskCategory
+    }
+}
 const taskModal = () => {
     const form = document.createElement('div')
     form.name = 'task-form'
     form.id = 'task_Modal'
 
     const nameInput = document.createElement('input');
-    nameInput.setAttribute('type','text');
-    nameInput.setAttribute('name','name');
-    nameInput.setAttribute('id','name_input')
+    nameInput.type = 'text'
+    nameInput.name = 'name'
+    nameInput.id = 'name_input'
 
     const descInput = document.createElement('input');
     descInput.setAttribute('type','text')
@@ -48,15 +66,18 @@ const taskModal = () => {
     dateInput.setAttribute('name', 'date');
     dateInput.setAttribute('id','date_input');
 
-    
+    const project = document.createElement('input')
+    project.type = 'text'
+    project.name = 'category'
+    project.id = 'project_Assign'
 
     const submit = document.createElement('button');
     submit.setAttribute('id','task_submit')
     submit.type = 'submit'
     submit.innerText = 'Add'
+    submit.addEventListener('click',addTaskToProj)
 
-
-    form.append(nameInput,descInput,dateInput,submit);
+    form.append(nameInput,descInput,dateInput,project,submit);
 
     return form
 }
@@ -72,8 +93,6 @@ const projectModal = () => {
     const addProjBtn = document.createElement('button')
     addProjBtn.id = 'add_Proj_Button'
     addProjBtn.innerText = 'Add'
-
-    
     addProjBtn.addEventListener('click',addProject)
 
     modalContainer.append(
@@ -83,18 +102,52 @@ const projectModal = () => {
     return modalContainer
 }
 
+
+const mainModal = () => {
+    const mainContainer = document.createElement('div')
+    mainContainer.classList.add('master_Modal_Container')
+    const modal = document.createElement('div');
+    modal.id = 'master_Modal'
+
+    const nav = document.createElement('div')
+    nav.id = 'master_Modal_Nav'
+ 
+    const project = document.createElement('button')
+    project.id = 'new_Project'
+    project.innerText = 'Project'
+    project.addEventListener('click',displayForms)
+
+    const todo = document.createElement('button')
+    todo.id = 'new_Task';
+    todo.innerText = 'Task'
+    todo.addEventListener('click',displayForms)
+    const formContainer = document.createElement('div')
+    formContainer.id = 'modal_Forms'
+
+    const closeOut = document.createElement('button')
+    closeOut.innerText = 'X'
+    closeOut.addEventListener('click',toggleModal)
+    
+    nav.append(project,todo)
+    modal.append(nav,formContainer)
+    mainContainer.append(modal,closeOut)
+    return mainContainer
+
+
+
+}
+
+
+
 const initialUi = (() => {
     const header = document.createElement('header');
     const nav = buildNav()
     const main = document.createElement('main');
 
     //add event listener to make Modal Form.
-    const taskButton = document.createElement('button')
-    taskButton.innerText = 'New Task';
-    taskButton.id = 'task_button'
-    taskButton.addEventListener('click',toggleTaskForm)
+    
 
-    main.appendChild(taskButton)
+    
     const footer = document.createElement('footer');
     document.body.append(header,nav,main,footer)
 })();
@@ -105,5 +158,7 @@ export{
     taskModal,
     navProjButton,
     projectModal,
+    GiveDomInpts,
+    mainModal
    
 }

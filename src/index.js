@@ -1,15 +1,9 @@
 import './style.css';
-import { 
-    UI
-} from './modules/ui';
-import { 
-    displayProjects
-} from './modules/nav';
+import { loadpage } from './modules/ui';
+loadpage()
 
 
-UI.loadpage()
 
-displayProjects()
 
 
 

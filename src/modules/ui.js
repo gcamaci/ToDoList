@@ -1,4 +1,4 @@
-import { displayTasks,addProject,addTaskToProj,displayProjects} from "./app";
+import {addProject,addTaskToProj,displayProjects,displayTasks} from "./app";
 //import { addTaskToProj } from "./tasks";
 import { toggleModal,displayForms } from "./Modal";
 
@@ -9,15 +9,13 @@ const loadpage = () =>{
     const footer = document.createElement('footer');
     document.body.append(header,nav,main,footer)
     displayProjects()
+    displayTasks()
 };
 
 const createNavButton = (name) => {
     const projButton = document.createElement('button')
     projButton.innerText = name
     projButton.dataset.project = name
-    projButton.addEventListener('click',displayTasks)
-        
-   
     return projButton
 }
 const buildNav = () => {
@@ -137,14 +135,49 @@ const giveDomInpts = () => {
         taskCategory
     }
 }
+const buildTaskElement = (name,desc,date) => {
+    const taskCard = document.createElement('div');
+    taskCard.id = ''
 
+    const title = document.createElement('div')
+    title.innerText = name
+
+    const description = document.createElement('div')
+    description.innerText = desc
+
+    const dueDate = document.createElement('div')
+    dueDate.innerText = date
+
+
+    const edit = document.createElement('button')
+    edit.innerText='edit'
+    const deleteTask = document.createElement('button')
+    deleteTask.innerText = 'Delete'
+    const markComplete = document.createElement('button')
+    markComplete.innerText = 'Status'
+
+    taskCard.append(
+        title,
+        description,
+        dueDate,
+        edit,
+        deleteTask,
+        markComplete
+
+    )
+
+    return taskCard
+}
+
+//
 export{
     loadpage,
     createNavButton,
     buildTaskForm,
     buildProjectForm,
     buildModal,
-    giveDomInpts
+    giveDomInpts,
+    buildTaskElement
 }
 
 

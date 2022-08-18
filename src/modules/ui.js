@@ -135,7 +135,7 @@ const giveDomInpts = () => {
         taskCategory
     }
 }
-const buildTaskElement = (name,desc,date) => {
+const buildTaskElement = (name,desc,date,code) => {
     const taskCard = document.createElement('div');
     taskCard.id = ''
 
@@ -150,11 +150,24 @@ const buildTaskElement = (name,desc,date) => {
 
 
     const edit = document.createElement('button')
-    edit.innerText='edit'
+    edit.innerText='Edit'
+    edit.dataset.taskId = code
+    edit.name = 'Edit'
+    edit.classList.add('task_Btn')
+
     const deleteTask = document.createElement('button')
     deleteTask.innerText = 'Delete'
+    deleteTask.dataset.taskId = code 
+    deleteTask.classList.add('task_Btn')
+    deleteTask.name = 'Delete'
+    
+
     const markComplete = document.createElement('button')
+    markComplete.dataset.taskId = code
+    markComplete.classList.add('task_Btn')
+    markComplete.name = 'Status'
     markComplete.innerText = 'Status'
+    
 
     taskCard.append(
         title,

@@ -6,6 +6,7 @@ const TaskFactory = (name,desc,date,category) => {
     const setDesc = (newDesc) => desc = newDesc
     const setDate = (newDate) => date = newDate
     const getDate = () => date
+    
 
     return {
         status,

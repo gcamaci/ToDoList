@@ -58,6 +58,7 @@ const addTaskToProj = () =>{
         }
     });
     toggleModal()
+    displayTasks()
 }
 //adds Project to projects array
 const addProject = () => {

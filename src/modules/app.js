@@ -1,12 +1,13 @@
 import {CategoryFactory,TaskFactory } from "./factory";
 import { toggleModal } from "./Modal";
 import {createNavButton,giveDomInpts,buildTaskElement } from "./ui";
-
+import { storeProject } from "./storage";
 const Gym = CategoryFactory('Gym'); 
 const task1 = TaskFactory('deadlife','Just a test','2022-02-02','Gym')
-Gym.pushTask(task1)
+//Gym.pushTask(task1)
 const Coding = CategoryFactory('Coding')
 let projects = [Gym,Coding]
+
 let currentProject = projects[0]
 
 const  displayProjects = () =>{
@@ -76,6 +77,8 @@ const addProject = () => {
     const projInput = document.getElementById('proj_Name_Inpt');
     let newProject = CategoryFactory(projInput.value);
     projects.push(newProject)
+    //storeProject(newProject)
+
     displayProjects()
     toggleModal()
     projInput.value = ''
@@ -91,9 +94,6 @@ function taskListeners(event){
     }else if(eventName === 'Status'){
         taskStatus(taskcode);
     }
-    
-
-
 }
 
 function popTask(code){
@@ -114,4 +114,10 @@ function taskStatus(code){
 
 
 
-export {addProject,addTaskToProj,displayProjects,displayTasks}
+export {
+    addProject,
+    addTaskToProj,
+    displayProjects,
+    displayTasks,
+    projects
+}

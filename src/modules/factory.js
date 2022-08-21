@@ -1,6 +1,7 @@
 const TaskFactory = (name,desc,date,category) => {
     let status = false;
     const idCode = Math.floor(Math.random() * 1000)
+    /*
     const getDesc = () => desc
     const getName = () => name
     const getCategory = () => category
@@ -9,20 +10,20 @@ const TaskFactory = (name,desc,date,category) => {
     const getDate = () => date;
     const toggleStatus = () => status = !status;
     const getStatus = () => status
-
+    */
 
 
     return {
         idCode,
         status,
-        getDesc,
-        setDesc,
-        getDate,
-        setDate,
-        getName,
-        getCategory,
-        getStatus,
-        toggleStatus,
+        desc,
+        date,
+        category,
+        name
+        //getName,
+        //getCategory,
+        //getStatus,
+        //toggleStatus,
     }
 }
 
@@ -45,7 +46,7 @@ const CategoryFactory = (name) => {
     }
 
     
-    return {taskStorage,getName,pushTask,removeTask}
+    return {taskStorage,getName,pushTask,removeTask,name}
 }
 
 

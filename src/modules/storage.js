@@ -1,21 +1,23 @@
 import { projects } from "./app";
 
 
-const initialStorage = (() => {
+const initialStorage = () => {
     if(localStorage.length  === 0 ){
-        console.log('working')
+        localStorage.setItem("projects",JSON.stringify(projects));
     }
-})()
-
-
-
-
-
-const storeProject = (newProj) => {
-
-    let newProjList = JSON.parse(localStorage.getItem("projects"));
-    newProjList.push(newProj)
-    localStorage.setItem("projects", JSON.stringify(newProjList))
+    
 }
 
-export{storeProject}
+let localProjects = JSON.parse(localStorage.getItem("projects"));
+
+const storeProject = (newProj) => {
+    localProjects.push(newProj)
+    localStorage.setItem("projects", JSON.stringify(localProjects))
+    console.log(localStorage)
+}
+
+export{
+    storeProject,
+    initialStorage,
+    localProjects
+}

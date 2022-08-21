@@ -1,20 +1,11 @@
 import './style.css';
+import {initialStorage} from './modules/storage'
 import { loadpage } from './modules/ui';
+
+
+initialStorage()
 loadpage()
 
-let newArray = []
-
-
-
-
-
-
-
-let newObj = {
-    name: "joey",
-    last: "camaci",
-    number: 25
-}
 
 
 //console.log(localStorage)

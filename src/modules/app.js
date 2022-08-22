@@ -1,14 +1,15 @@
 import {CategoryFactory,TaskFactory } from "./factory";
 import { toggleModal } from "./Modal";
 import {createNavButton,giveDomInpts,buildTaskElement } from "./ui";
-import { storeProject,localProjects } from "./storage";
+import { storeProject,localProjects,saveProjectList} from "./storage";
 const Gym = CategoryFactory('Gym'); 
-const task1 = TaskFactory('deadlife','Just a test','2022-02-02','Gym')
+//const task1 = TaskFactory('deadlife','Just a test','2022-02-02','Gym')
 //Gym.pushTask(task1)
 const Coding = CategoryFactory('Coding')
 let projects = [Gym,Coding]
 //let localProjects = JSON.parse(localStorage.getItem("projects"))
-let currentProject = projects[0]
+let currentProject = Gym
+
 
 const  displayProjects = () =>{
     const container = document.querySelector('.proj_nav_container')
@@ -30,12 +31,13 @@ const displayTasks = () => {
     currentProject.taskStorage.forEach((task)=>{
         //console.log(task.idCode)
         let taskElement = buildTaskElement(
-            task.getName(),
-            task.getDesc(),
-            task.getDate(),
+            task.name,
+            task.desc,
+            task.date,
             task.idCode
         )
         taskContainer.appendChild(taskElement);
+        
     })
 
     const taskButtons = document.querySelectorAll('.task_Btn')
@@ -64,12 +66,13 @@ const addTaskToProj = () =>{
         DOM.taskDate.value,
         DOM.taskCategory.value
     )
-    projects.forEach((project)=>{
+    localProjects.forEach((project)=>{
         if(project.name === newTask.category){
-            project.pushTask(newTask);
+            project.taskStorage.push(newTask)
             console.log(project.taskStorage)
         }
     });
+    saveProjectList()
     toggleModal()
     displayTasks()
 }
@@ -91,16 +94,22 @@ function taskListeners(event){
     let taskcode = event.target.dataset.taskId
     let eventName = event.target.name
     if(eventName === 'Delete'){
-        popTask(taskcode)
+        removeTask(taskcode)
     }else if(eventName === 'Status'){
         taskStatus(taskcode);
     }
 }
 
-function popTask(code){
-    currentProject.removeTask(code)
+const removeTask = (taskId) => {
+    currentProject.taskStorage.forEach((task,index)=>{
+        if(task.idCode == taskId){
+            currentProject.taskStorage.splice(index,1);
+        }
+    })
     displayTasks()
+    saveProjectList()
 }
+
 
 function taskStatus(code){
     currentProject.taskStorage.forEach((task)=>{

@@ -15,9 +15,12 @@ const storeProject = (newProj) => {
     localStorage.setItem("projects", JSON.stringify(localProjects))
     console.log(localStorage)
 }
-
+const saveProjectList = () => {
+    localStorage.setItem("projects", JSON.stringify(localProjects))
+}
 export{
     storeProject,
     initialStorage,
-    localProjects
+    localProjects,
+    saveProjectList
 }

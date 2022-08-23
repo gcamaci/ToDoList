@@ -1,12 +1,18 @@
-import { projects } from "./app";
+
+import { CategoryFactory } from "./factory";
+
+const Gym = CategoryFactory('Gym'); 
+
+const Coding = CategoryFactory('Coding')
+let projects = [Gym,Coding]
 
 
-const initialStorage = () => {
+const initialStorage = (() => {
     if(localStorage.length  === 0 ){
         localStorage.setItem("projects",JSON.stringify(projects));
     }
     
-}
+})();
 
 let localProjects = JSON.parse(localStorage.getItem("projects"));
 
@@ -20,7 +26,6 @@ const saveProjectList = () => {
 }
 export{
     storeProject,
-    initialStorage,
     localProjects,
     saveProjectList
 }

@@ -2,27 +2,24 @@ import {CategoryFactory,TaskFactory } from "./factory";
 import { toggleModal } from "./Modal";
 import {createNavButton,giveDomInpts,buildTaskElement } from "./ui";
 import { storeProject,localProjects,saveProjectList} from "./storage";
-const Gym = CategoryFactory('Gym'); 
-//const task1 = TaskFactory('deadlife','Just a test','2022-02-02','Gym')
-//Gym.pushTask(task1)
-const Coding = CategoryFactory('Coding')
-let projects = [Gym,Coding]
-//let localProjects = JSON.parse(localStorage.getItem("projects"))
-let currentProject = Gym
+
+
+
+
+let currentProject = localProjects[0]
 
 
 const  displayProjects = () =>{
     const container = document.querySelector('.proj_nav_container')
     container.innerHTML = ''
     localProjects.forEach((project)=>{
-        let newProject = CategoryFactory(project.name)
-        let newNavBtn = createNavButton(newProject.getName())
+        let newNavBtn = createNavButton(project.name)
         newNavBtn.addEventListener('click',toggleProject)
         container.appendChild(newNavBtn)
         
     });
     console.log(localProjects)
-
+    
 }
 //create Task Dom, display Task Dom, and add event listeners
 const displayTasks = () => {
@@ -80,8 +77,6 @@ const addTaskToProj = () =>{
 const addProject = () => {
     const projInput = document.getElementById('proj_Name_Inpt');
     let newProject = CategoryFactory(projInput.value);
-    projects.push(newProject)
-    //storeProject(newProject)
     storeProject(newProject)
     displayProjects()
     toggleModal()
@@ -114,10 +109,11 @@ const removeTask = (taskId) => {
 function taskStatus(code){
     currentProject.taskStorage.forEach((task)=>{
         if(task.idCode == code){
-            task.toggleStatus()
-            console.log(task.getStatus())
+            task.status = !task.status
+            //console.log(task.getStatus())
             console.log(task.idCode)
-            console.log(task.getName())
+            console.log(task.status)
+            //console.log(task.getName())
         }
     })  
 }
@@ -129,5 +125,4 @@ export {
     addTaskToProj,
     displayProjects,
     displayTasks,
-    projects
 }

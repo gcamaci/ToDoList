@@ -15,28 +15,10 @@ const TaskFactory = (name,desc,date,category) => {
 const CategoryFactory = (name) => {
     let taskStorage = [];
 
-    const pushTask = (task) => {
-        taskStorage.push(task);
-    }
-
-    const getName = () => name;
-
-    /*
-    const removeTask = (taskId) => {
-        taskStorage.forEach((task,index)=>{
-            if(task.idCode == taskId){
-                taskStorage.splice(index,1);
-            }
-        })
-    }
-    */
+ 
     
-    return {taskStorage,getName,pushTask,name}
+    return {taskStorage,name}
 }
-
-
-
-
 export{
     TaskFactory,
     CategoryFactory

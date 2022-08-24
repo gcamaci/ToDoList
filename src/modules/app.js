@@ -82,7 +82,7 @@ const addProject = () => {
     toggleModal()
     projInput.value = ''
 
-    console.log(projects)
+    
 }
 
 function taskListeners(event){
@@ -110,10 +110,9 @@ function taskStatus(code){
     currentProject.taskStorage.forEach((task)=>{
         if(task.idCode == code){
             task.status = !task.status
-            //console.log(task.getStatus())
+            
             console.log(task.idCode)
             console.log(task.status)
-            //console.log(task.getName())
         }
     })  
 }

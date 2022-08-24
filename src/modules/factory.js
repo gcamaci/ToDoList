@@ -14,8 +14,6 @@ const TaskFactory = (name,desc,date,category) => {
 
 const CategoryFactory = (name) => {
     let taskStorage = [];
-
- 
     
     return {taskStorage,name}
 }

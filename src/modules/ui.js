@@ -8,7 +8,7 @@ const loadpage = () =>{
     const main = document.createElement('main');
     const footer = document.createElement('footer');
     document.body.append(header,nav,main,footer)
-    nav.setAttribute('class','bg-red-400');
+    nav.classList.add('bg-red-400')
     displayProjects()
     displayTasks()
 };

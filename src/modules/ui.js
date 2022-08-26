@@ -8,7 +8,7 @@ const loadpage = () =>{
     const main = document.createElement('main');
     const footer = document.createElement('footer');
     document.body.append(header,nav,main,footer)
-    nav.classList.add('bg-red-400')
+    
     displayProjects()
     displayTasks()
 };
@@ -28,7 +28,6 @@ const buildNav = () => {
     projectContainer.classList.add('proj_nav_container');
 
     const addModal = document.createElement('button')
-    addModal.classList.add("bg-red-400")
     addModal.innerText = '+'
     addModal.id = 'open_Modal'
     addModal.addEventListener('click',toggleModal)

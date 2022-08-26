@@ -1,4 +1,4 @@
-import './input.css';
+
 import { loadpage } from './modules/ui';
 
 

@@ -11,7 +11,7 @@ $light-bg: #3d3d3d;
 
 
 body{
-    background-color: $dark-background ;
+    background-color: rgb(103, 77, 103);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -19,25 +19,28 @@ body{
 }
 
 .wrapper{
-   background-color: $secondary-bg;
+   background-color: $dark-background;
    color: $primary-text-color;
    width: 70%;
    height: 80vh;
+   border-radius: 15px;
    display: grid;
    grid-template-columns: 1fr 3fr;
-   border-radius:  5px;
-   box-shadow: 0px 0px 2px 2px $light-bg;
+   
+   box-shadow: 0px 0px 10px 5px rgb(47, 39, 47);
 
 }
 
 main{
-    background-color: $light-bg;
-    padding: 5px;
+    background-color: $secondary-bg;
+    border-top-right-radius:  15px;
+    border-bottom-right-radius: 15px;
+    padding: 20px;
 }
 
 .task_card{
     border: 1px solid black;
-}
-nav{
+    background-color: $light-bg;
     
 }
+

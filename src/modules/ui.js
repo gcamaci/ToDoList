@@ -2,16 +2,10 @@ import {addProject,addTaskToProj,displayProjects,displayTasks} from "./app";
 //import { addTaskToProj } from "./tasks";
 import { toggleModal,displayForms } from "./Modal";
 
-const loadpage = () =>{
-    const header = document.createElement('header')
-    const nav = buildNav()
-    const main = document.createElement('main');
-    const footer = document.createElement('footer');
-    document.body.append(header,nav,main,footer)
-    
-    displayProjects()
-    displayTasks()
-};
+const buildHeader = () => {
+    const header = document.createElement('header');
+    return header 
+}
 
 const createNavButton = (name) => {
     const projButton = document.createElement('button')
@@ -138,7 +132,8 @@ const giveDomInpts = () => {
 }
 const buildTaskElement = (name,desc,date,code) => {
     const taskCard = document.createElement('div');
-    taskCard.id = ''
+    taskCard.classList.add('task_card')
+    taskCard.dataset.taskCode = `${code}`
 
     const title = document.createElement('div')
     title.innerText = name
@@ -183,6 +178,20 @@ const buildTaskElement = (name,desc,date,code) => {
     return taskCard
 }
 
+
+
+
+const loadpage = () =>{
+    const wrapper = document.createElement('div')
+    wrapper.classList.add('wrapper')
+    const nav = buildNav()
+    const main = document.createElement('main');
+    wrapper.append(nav,main)
+    document.body.append(wrapper)
+    
+    displayProjects()
+    displayTasks()
+};
 //
 export{
     loadpage,

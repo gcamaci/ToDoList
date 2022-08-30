@@ -4,6 +4,10 @@ import { toggleModal,displayForms } from "./Modal";
 
 const buildHeader = () => {
     const header = document.createElement('header');
+    const title = document.createElement('h1');
+    title.innerText = 'Header'
+
+    header.appendChild(title)
     return header 
 }
 
@@ -182,12 +186,12 @@ const buildTaskElement = (name,desc,date,code) => {
 
 
 const loadpage = () =>{
-    const wrapper = document.createElement('div')
-    wrapper.classList.add('wrapper')
+    const header = buildHeader()
     const nav = buildNav()
     const main = document.createElement('main');
-    wrapper.append(nav,main)
-    document.body.append(wrapper)
+    const footer = document.createElement('footer')
+    //add footer
+    document.body.append(header,nav,main,footer)
     
     displayProjects()
     displayTasks()

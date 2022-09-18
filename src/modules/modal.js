@@ -9,7 +9,6 @@ const toggleModal = () => {
         main.style.gridColumn = "4/10"
         main.style.gridRow = "2"
         document.body.appendChild(buildModal()) 
-        
     }else{
         main.style.gridColumn = "4/13"
         const modal = document.querySelector('.master_Modal_Container');

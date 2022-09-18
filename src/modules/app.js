@@ -22,6 +22,7 @@ const  displayProjects = () =>{
     
 }
 //create Task Dom, display Task Dom, and add event listeners
+//display Tasks and All tasks should be made into one single function,for better re-usability
 const displayTasks = () => {
     const taskContainer = document.querySelector('main')
     taskContainer.innerHTML = ''
@@ -41,6 +42,32 @@ const displayTasks = () => {
     taskButtons.forEach((btn) =>{
         btn.addEventListener('click',taskListeners)
     });
+}
+
+
+const allTasks = () =>{
+    let taskArray = [];
+    localProjects.forEach((project) =>{
+        taskArray.push(project.taskStorage)
+    })
+    taskArray = taskArray.flat(1)
+    const taskContainer = document.querySelector('main')
+    taskContainer.innerHTML = ''
+    taskArray.forEach((task)=>{
+        let taskElement = buildTaskElement(
+            task.name,
+            task.desc,
+            task.date,
+            task.idCode
+        )
+        taskContainer.appendChild(taskElement);
+    })
+    const taskButtons = document.querySelectorAll('.task_Btn')
+    taskButtons.forEach((btn) =>{
+        btn.addEventListener('click',taskListeners)
+    });
+    //Task array turned into one single array
+    
 }
 
 function toggleProject(event){
@@ -124,4 +151,5 @@ export {
     addTaskToProj,
     displayProjects,
     displayTasks,
+    allTasks
 }

@@ -1,9 +1,11 @@
 
-import { CategoryFactory } from "./factory";
+import { CategoryFactory,TaskFactory } from "./factory";
 
 const Gym = CategoryFactory('Gym'); 
 
 const Coding = CategoryFactory('Coding')
+
+const task1 = TaskFactory('Finish UI',"")
 let projects = [Gym,Coding]
 
 

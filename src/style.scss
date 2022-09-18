@@ -15,16 +15,11 @@ body{
     background-color: $dark-background;
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    
-    
-
 }
 
 header{
     grid-column:  1/3;
     height: 5vh;
-    
-    
 }
 
 nav{
@@ -47,7 +42,8 @@ main{
 
 
 .task_card{
-    background-color: $purp-bg;
+    background-color: $secondary-bg;
+    border: 3px solid $purp-bg;
     
 }
 

@@ -19,17 +19,19 @@ const createNavButton = (name) => {
 }
 const buildNav = () => {
     const nav = document.createElement('nav')
+    
+    //project buttons container
+    const projectContainer = document.createElement('div')
     const title = document.createElement('h3')
     title.innerText = 'Projects'
-    
-    const projectContainer = document.createElement('div')
+    projectContainer.appendChild(title)
     projectContainer.classList.add('proj_nav_container');
 
     const addModal = document.createElement('button')
     addModal.innerText = '+'
     addModal.id = 'open_Modal'
     addModal.addEventListener('click',toggleModal)
-    nav.append(title,projectContainer,addModal)
+    nav.append(projectContainer,addModal)
     
     
     return nav

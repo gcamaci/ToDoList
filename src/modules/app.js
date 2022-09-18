@@ -6,7 +6,7 @@ import { storeProject,localProjects,saveProjectList} from "./storage";
 
 
 
-let currentProject = localProjects[0]
+let currentProject = localProjects[1]
 
 
 const  displayProjects = () =>{
@@ -26,6 +26,10 @@ const  displayProjects = () =>{
 const displayTasks = () => {
     const taskContainer = document.querySelector('main')
     taskContainer.innerHTML = ''
+
+    const category = document.createElement('h2')
+    category.innerText = currentProject.name;
+    taskContainer.appendChild(category)
     currentProject.taskStorage.forEach((task)=>{
         //console.log(task.idCode)
         let taskElement = buildTaskElement(
@@ -70,6 +74,9 @@ const allTasks = () =>{
     
 }
 
+const finishedTasks = () => {
+
+}
 function toggleProject(event){
     const key = event.target.dataset.project;
     localProjects.forEach((project)=>{
@@ -134,14 +141,29 @@ const removeTask = (taskId) => {
 
 
 function taskStatus(code){
+    const domElements = document.querySelectorAll('.status-btn')
+    let domElement ;
+    domElements.forEach((btn)=>{
+        console.log(btn.dataset.taskId)
+        if(btn.dataset.taskId == code){
+            domElement = btn
+        }
+    })
+
     currentProject.taskStorage.forEach((task)=>{
         if(task.idCode == code){
             task.status = !task.status
-            
+            if(task.status === true){
+                domElement.style.backgroundColor='green'
+            }
+            else{
+                domElement.style.backgroundColor = 'red'
+            }
             console.log(task.idCode)
             console.log(task.status)
         }
-    })  
+    })
+    
 }
 
 

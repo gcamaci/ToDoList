@@ -5,7 +5,7 @@ import { toggleModal,displayForms } from "./Modal";
 const buildHeader = () => {
     const header = document.createElement('header');
     const title = document.createElement('h1');
-    title.innerText = 'Header'
+    title.innerText = 'To-Do App'
 
     header.appendChild(title)
     return header 
@@ -20,11 +20,15 @@ const createNavButton = (name) => {
 }
 const buildNav = () => {
     const nav = document.createElement('nav')
-    
+    const taskButtonContainer = document.createElement('div')
+
+    const completeTasks = document.createElement('button')
+    completeTasks.innerText = 'finished'
+
     const allTaskBtn = document.createElement('button');
     allTaskBtn.innerText = "All Tasks"
     allTaskBtn.addEventListener('click',allTasks)
-
+    taskButtonContainer.append(allTaskBtn,completeTasks)
     const projectMain = document.createElement('div')
     projectMain.classList.add('main-project-container')
     //project buttons contain
@@ -40,7 +44,7 @@ const buildNav = () => {
     addModal.id = 'open_Modal'
     addModal.addEventListener('click',toggleModal)
    
-    nav.append(allTaskBtn,projectMain,addModal)
+    nav.append(taskButtonContainer,projectMain,addModal)
     
     
     return nav
@@ -199,6 +203,7 @@ const buildTaskElement = (name,desc,date,code) => {
     markComplete.classList.add('task_Btn')
     markComplete.name = 'Status'
     markComplete.innerText = 'Status'
+    markComplete.classList.add('status-btn')
 
 
     taskBtnContainer.append(deleteTask,markComplete)

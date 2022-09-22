@@ -7,7 +7,7 @@ import { storeProject,localProjects,saveProjectList} from "./storage";
 
 
 let currentProject = localProjects[1]
-
+let allProjTasks = [];
 
 const  displayProjects = () =>{
     const container = document.querySelector('.proj_nav_container')
@@ -26,7 +26,7 @@ const  displayProjects = () =>{
 const displayTasks = () => {
     const taskContainer = document.querySelector('main')
     taskContainer.innerHTML = ''
-
+    console.log(currentProject.name)
     const category = document.createElement('h2')
     category.innerText = currentProject.name;
     taskContainer.appendChild(category)
@@ -36,12 +36,13 @@ const displayTasks = () => {
             task.name,
             task.desc,
             task.date,
-            task.idCode
+            task.idCode,
+            task.status
         )
         taskContainer.appendChild(taskElement);
         
     })
-
+    
     const taskButtons = document.querySelectorAll('.task_Btn')
     taskButtons.forEach((btn) =>{
         btn.addEventListener('click',taskListeners)
@@ -49,34 +50,37 @@ const displayTasks = () => {
 }
 
 
-const allTasks = () =>{
+const allTasks = (event) =>{
     let taskArray = [];
     localProjects.forEach((project) =>{
         taskArray.push(project.taskStorage)
     })
+    //combines all arrays inside taskArray into one single array
     taskArray = taskArray.flat(1)
-    const taskContainer = document.querySelector('main')
-    taskContainer.innerHTML = ''
-    taskArray.forEach((task)=>{
-        let taskElement = buildTaskElement(
-            task.name,
-            task.desc,
-            task.date,
-            task.idCode
-        )
-        taskContainer.appendChild(taskElement);
-    })
-    const taskButtons = document.querySelectorAll('.task_Btn')
-    taskButtons.forEach((btn) =>{
-        btn.addEventListener('click',taskListeners)
-    });
-    //Task array turned into one single array
-    
+
+    if(event.target.id === "completed-tasks"){
+        const finishedTasks = CategoryFactory('Completed Tasks')
+        taskArray.forEach((task)=>{
+            if(task.status===true){
+                finishedTasks.taskStorage.push(task)
+
+            }
+        })
+        currentProject = finishedTasks
+        console.log(currentProject.name)
+    }else{
+        const newProj = CategoryFactory('All Tasks')
+        newProj.taskStorage = taskArray
+        console.log(newProj)
+        console.log(newProj.taskStorage);
+
+        currentProject = newProj;
+
+    }
+    displayTasks()
 }
 
-const finishedTasks = () => {
 
-}
 function toggleProject(event){
     const key = event.target.dataset.project;
     localProjects.forEach((project)=>{
@@ -85,6 +89,7 @@ function toggleProject(event){
         }
     })
     console.log(currentProject.taskStorage)
+    console.log(currentProject.name)
     displayTasks()
 
 }
@@ -129,12 +134,14 @@ function taskListeners(event){
     }
 }
 
-const removeTask = (taskId) => {
+const removeTask = (taskId,project) => {
     currentProject.taskStorage.forEach((task,index)=>{
         if(task.idCode == taskId){
             currentProject.taskStorage.splice(index,1);
         }
     })
+
+
     displayTasks()
     saveProjectList()
 }
@@ -154,15 +161,19 @@ function taskStatus(code){
         if(task.idCode == code){
             task.status = !task.status
             if(task.status === true){
-                domElement.style.backgroundColor='green'
+                domElement.classList.add('task-status-green');
+                domElement.classList.remove('task-status-red')
             }
             else{
-                domElement.style.backgroundColor = 'red'
+                domElement.classList.remove('task-status-green');
+                domElement.classList.add('task-status-red')
             }
             console.log(task.idCode)
             console.log(task.status)
         }
     })
+    saveProjectList()
+    //displayTasks()
     
 }
 

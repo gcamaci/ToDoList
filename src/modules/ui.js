@@ -1,6 +1,7 @@
 import {addProject,addTaskToProj,displayProjects,displayTasks,allTasks} from "./app";
 //import { addTaskToProj } from "./tasks";
 import { toggleModal,displayForms } from "./Modal";
+import { localProjects } from "./storage";
 
 const buildHeader = () => {
     const header = document.createElement('header');
@@ -24,9 +25,12 @@ const buildNav = () => {
 
     const completeTasks = document.createElement('button')
     completeTasks.innerText = 'finished'
+    completeTasks.id ='completed-tasks'
+    completeTasks.addEventListener('click',allTasks)
 
     const allTaskBtn = document.createElement('button');
     allTaskBtn.innerText = "All Tasks"
+    allTaskBtn.id = 'all-tasks'
     allTaskBtn.addEventListener('click',allTasks)
     taskButtonContainer.append(allTaskBtn,completeTasks)
     const projectMain = document.createElement('div')
@@ -45,8 +49,7 @@ const buildNav = () => {
     addModal.addEventListener('click',toggleModal)
    
     nav.append(taskButtonContainer,projectMain,addModal)
-    
-    
+
     return nav
 }
 //MODAL
@@ -79,12 +82,21 @@ const buildTaskForm = () => {
     dateInput.classList.add('task-inpt')
     
 
-    const project = document.createElement('input')
-    project.type = 'text'
+    const project = document.createElement('select');
+    localProjects.forEach((proj)=>{
+        const opt = document.createElement('option')
+        opt.value = proj.name
+        opt.innerText = proj.name
+
+        project.appendChild(opt)
+    });
+
+    
     project.name = 'category'
     project.id = 'project_Assign'
     project.classList.add('task-inpt')
-    project.placeholder = "Project"
+    
+    
 
     const submit = document.createElement('button');
     submit.setAttribute('id','task_submit')
@@ -164,7 +176,7 @@ const giveDomInpts = () => {
         taskCategory
     }
 }
-const buildTaskElement = (name,desc,date,code) => {
+const buildTaskElement = (name,desc,date,code,status) => {
     const taskCard = document.createElement('div');
     taskCard.classList.add('task_card')
     taskCard.dataset.taskCode = `${code}`
@@ -204,7 +216,16 @@ const buildTaskElement = (name,desc,date,code) => {
     markComplete.name = 'Status'
     markComplete.innerText = 'Status'
     markComplete.classList.add('status-btn')
+    
+    if(status===true){
+        markComplete.classList.add('task-status-green');
+        markComplete.classList.remove('task-status-red')
+    
+    }else{
+        markComplete.classList.remove('task-status-green');
+        markComplete.classList.add('task-status-red')
 
+    }
 
     taskBtnContainer.append(deleteTask,markComplete)
     

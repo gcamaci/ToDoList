@@ -53,7 +53,7 @@ const buildNav = () => {
     return nav
 }
 //MODAL
-const buildTaskForm = () => {
+const buildTaskForm = (event) => {
     const form = document.createElement('div')
     form.name = 'task-form'
     form.id = 'task_Modal'
@@ -191,14 +191,31 @@ const buildTaskElement = (name,desc,date,code,status) => {
     const dueDate = document.createElement('div')
     dueDate.innerText = date
 
-    /*
+    
     const edit = document.createElement('button')
     edit.innerText='Edit'
     edit.dataset.taskId = code
     edit.name = 'Edit'
     edit.id = 'edit-task'
     edit.classList.add('task_Btn')
-    edit.addEventListener("click",toggleModal)*/
+    edit.addEventListener("click",(event)=>{
+        toggleModal()
+        const domElements = giveDomInpts()
+
+        if(event.target.id ==='edit-task'){
+            const cards = document.querySelectorAll('.task_card')
+            console.log(cards);
+            cards.forEach((card)=>{
+                if(card.dataset.taskCode == event.target.dataset.taskId){
+                    console.log(card)
+                    card.innerHTML = ''
+                }
+            })
+
+        }
+    })
+
+
     const taskBtnContainer = document.createElement('div')
     taskBtnContainer.classList.add('task-btn-container')
 
@@ -227,7 +244,7 @@ const buildTaskElement = (name,desc,date,code,status) => {
 
     }
 
-    taskBtnContainer.append(deleteTask,markComplete)
+    taskBtnContainer.append(deleteTask,markComplete,edit)
     
 
     taskCard.append(

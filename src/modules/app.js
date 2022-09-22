@@ -7,7 +7,7 @@ import { storeProject,localProjects,saveProjectList} from "./storage";
 
 
 let currentProject = localProjects[1]
-let allProjTasks = [];
+
 
 const  displayProjects = () =>{
     const container = document.querySelector('.proj_nav_container')

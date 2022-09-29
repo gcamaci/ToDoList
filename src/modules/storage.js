@@ -35,5 +35,6 @@ const saveProjectList = () => {
 export{
     storeProject,
     localProjects,
-    saveProjectList
+    saveProjectList,
+    initialStorage
 }

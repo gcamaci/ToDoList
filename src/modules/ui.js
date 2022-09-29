@@ -198,7 +198,7 @@ const buildTaskElement = (name,desc,date,code,status) => {
     edit.name = 'Edit'
     edit.id = 'edit-task'
     edit.classList.add('task_Btn')
-    edit.addEventListener("click",(event)=>{
+    /*edit.addEventListener("click",(event)=>{
         toggleModal()
         const domElements = giveDomInpts()
 
@@ -213,7 +213,7 @@ const buildTaskElement = (name,desc,date,code,status) => {
             })
 
         }
-    })
+    })*/
 
 
     const taskBtnContainer = document.createElement('div')

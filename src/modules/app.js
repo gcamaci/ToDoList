@@ -50,6 +50,48 @@ const displayTasks = () => {
 }
 
 
+
+
+
+//sets placeholder values in modal task from,sets attribute to edit instead of create in addtasktoproj
+const editTask = (event) => {
+    toggleModal()
+    const domElements = giveDomInpts()
+    let taskArray = getAllTasks();
+    const task = taskArray.find(task => task.idCode == event.target.dataset.taskId)
+    //const card = document.querySelector(`[data-task-code = "${event.target.dataset.taskId}"]`)
+
+    domElements.taskName.value= task.name
+    domElements.taskDesc.value = task.desc
+    domElements.taskCategory.value = task.category
+    console.log(domElements.taskName)
+
+
+    console.log(domElements)
+
+    console.log(parseFloat(task.date))
+    //console.log(card)
+    console.log(task.date)
+
+    const subBtn = document.getElementById('task_submit');
+    console.log(subBtn)
+    subBtn.dataset.setEdit = true;
+    subBtn.dataset.taskNum = task.idCode;
+
+
+}
+
+const getAllTasks = () =>{
+    let taskArray = [];
+    localProjects.forEach((project) =>{
+        taskArray.push(project.taskStorage)
+    })
+    //combines all arrays inside taskArray into one single array
+    taskArray = taskArray.flat(1);
+
+    return taskArray;
+}
+
 const allTasks = (event) =>{
     let taskArray = [];
     localProjects.forEach((project) =>{
@@ -93,21 +135,50 @@ function toggleProject(event){
     displayTasks()
 
 }
-//create a task and Push it to the correct project task array
-const addTaskToProj = () =>{
+
+const updateTask = (code) => {
+    const taskArray = getAllTasks();
+    const oldTask = taskArray.find(task => task.idCode == code)
     const DOM = giveDomInpts()
-    let newTask = TaskFactory(
-        DOM.taskName.value,
-        DOM.taskDesc.value,
-        DOM.taskDate.value,
-        DOM.taskCategory.value
-    )
-    localProjects.forEach((project)=>{
-        if(project.name === newTask.category){
-            project.taskStorage.push(newTask)
-            console.log(project.taskStorage)
+    localProjects.forEach(project => {
+        if(project.name === oldTask.category){
+            const index = project.taskStorage.findIndex(todo=>todo.idCode == code)
+            project.taskStorage[index].name = DOM.taskName.value
+            project.taskStorage[index].desc = DOM.taskDesc.value
+            project.taskStorage[index].category = DOM.taskCategory.value
+            project.taskStorage[index].date = DOM.taskDate.value
         }
     });
+    console.log(taskArray)
+    console.log(oldTask)
+    
+}
+
+
+//create a task and Push it to the correct project task array
+const addTaskToProj = (event) =>{
+    const DOM = giveDomInpts()
+    
+    if(event.target.dataset.setEdit){
+        updateTask(event.target.dataset.taskNum)
+    }else{
+        console.log(false)
+        let newTask = TaskFactory(
+            DOM.taskName.value,
+            DOM.taskDesc.value,
+            DOM.taskDate.value,
+            DOM.taskCategory.value
+        )
+    
+        localProjects.forEach((project)=>{
+            if(project.name === newTask.category){
+                project.taskStorage.push(newTask)
+                console.log(project.taskStorage)
+            }
+        });
+
+    }
+
     saveProjectList()
     toggleModal()
     displayTasks()
@@ -177,12 +248,11 @@ function taskStatus(code){
     
 }
 
-
-
 export {
     addProject,
     addTaskToProj,
     displayProjects,
     displayTasks,
-    allTasks
+    allTasks,
+    editTask
 }

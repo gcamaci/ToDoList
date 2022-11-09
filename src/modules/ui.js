@@ -1,4 +1,4 @@
-import {addProject,addTaskToProj,displayProjects,displayTasks,allTasks} from "./app";
+import {addProject,addTaskToProj,displayProjects,displayTasks,allTasks,editTask} from "./app";
 //import { addTaskToProj } from "./tasks";
 import { toggleModal,displayForms } from "./Modal";
 import { localProjects } from "./storage";
@@ -198,25 +198,9 @@ const buildTaskElement = (name,desc,date,code,status) => {
     edit.name = 'Edit'
     edit.id = 'edit-task'
     edit.classList.add('task_Btn')
-    edit.addEventListener("click",(event)=>{
-        toggleModal()
-        /*
-        const domElements = giveDomInpts()
-
-        if(event.target.id ==='edit-task'){
-            const cards = document.querySelectorAll('.task_card')
-            console.log(cards);
-            cards.forEach((card)=>{
-                if(card.dataset.taskCode == event.target.dataset.taskId){
-                    console.log(card)
-                    card.innerHTML = ''
-                }
-            })
-
-        }*/
-    })
-
-
+    edit.addEventListener("click",editTask)
+        
+  
     const taskBtnContainer = document.createElement('div')
     taskBtnContainer.classList.add('task-btn-container')
 

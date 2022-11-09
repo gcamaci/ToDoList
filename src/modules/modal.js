@@ -1,8 +1,9 @@
+import { editTask } from './app'
 import { buildProjectForm,buildTaskForm,buildModal } from './ui'
 
 let toggle = false
 const main  = document.querySelector('main')
-const toggleModal = () => {
+const toggleModal = (event) => {
     const main  = document.querySelector('main')
     if(toggle === false){
         console.log(main)
@@ -15,6 +16,8 @@ const toggleModal = () => {
         
         document.body.removeChild(modal) 
     }
+
+   
     toggle = !toggle
 }
 

@@ -1,4 +1,4 @@
-import {addProject,addTaskToProj,displayProjects,displayTasks,allTasks,editTask} from "./app";
+import {addProject,toggleProject,addTaskToProj,displayProjects,displayTasks,allTasks,editTask} from "./app";
 //import { addTaskToProj } from "./tasks";
 import { toggleModal,displayForms } from "./Modal";
 import { localProjects } from "./storage";
@@ -19,20 +19,25 @@ const createNavButton = (name) => {
     projButton.dataset.project = name
     return projButton
 }
+
+
+
+//add coding and work ToDo buttons to the main nav and not project nav. 
+
 const buildNav = () => {
     const nav = document.createElement('nav')
     const taskButtonContainer = document.createElement('div')
-
+    taskButtonContainer.classList.add('nav-buttons')
     const completeTasks = document.createElement('button')
     completeTasks.innerText = 'finished'
     completeTasks.id ='completed-tasks'
-    completeTasks.addEventListener('click',allTasks)
+    completeTasks.addEventListener('click',allTasks);
 
     const allTaskBtn = document.createElement('button');
     allTaskBtn.innerText = "All Tasks"
     allTaskBtn.id = 'all-tasks'
     allTaskBtn.addEventListener('click',allTasks)
-    taskButtonContainer.append(allTaskBtn,completeTasks)
+    //taskButtonContainer.append(allTaskBtn,completeTasks)
     const projectMain = document.createElement('div')
     projectMain.classList.add('main-project-container')
     //project buttons contain
@@ -47,8 +52,23 @@ const buildNav = () => {
     addModal.innerText = '+'
     addModal.id = 'open_Modal'
     addModal.addEventListener('click',toggleModal)
-   
-    nav.append(taskButtonContainer,projectMain,addModal)
+
+    const codeProj = document.createElement('button')
+    codeProj.innerText = 'Code'
+    codeProj.dataset.project = 'Coding'
+    codeProj.addEventListener('click',toggleProject)
+
+    const workProj = document.createElement('button')
+    workProj.innerText = 'Work'
+    workProj.dataset.project = 'Work'
+    workProj.addEventListener('click',toggleProject)
+
+    const navBtns = [allTaskBtn,completeTasks,codeProj,workProj]
+    navBtns.forEach((btn)=>{
+        btn.classList.add('nav_btn')
+    })
+    taskButtonContainer.append(allTaskBtn,completeTasks,codeProj,workProj,addModal)
+    nav.append(taskButtonContainer,projectMain)
 
     return nav
 }

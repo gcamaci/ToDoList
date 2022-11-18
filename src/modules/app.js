@@ -13,9 +13,9 @@ const  displayProjects = () =>{
     const container = document.querySelector('.proj_nav_container')
     container.innerHTML = ''
     localProjects.forEach((project)=>{
-        let newNavBtn = createNavButton(project.name)
-        newNavBtn.addEventListener('click',toggleProject)
-        container.appendChild(newNavBtn)
+        let newNavBtn = createNavButton(project.name);
+        newNavBtn.addEventListener('click',toggleProject);
+        container.appendChild(newNavBtn);
         
     });
     console.log(localProjects)
@@ -254,5 +254,6 @@ export {
     displayProjects,
     displayTasks,
     allTasks,
-    editTask
+    editTask,
+    toggleProject,
 }

@@ -4,7 +4,7 @@ import { buildProjectForm,buildTaskForm,buildModal } from './ui'
 let toggle = false
 const main  = document.querySelector('main')
 const toggleModal = (event) => {
-    //const main  = document.querySelector('main')
+    
     if(toggle === false){
         console.log(main)
         

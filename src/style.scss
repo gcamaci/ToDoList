@@ -6,7 +6,7 @@
 $dark-background:#121212;
 $secondary-bg: #181818;
 $primary-text-color: #ffffff;
-$light-bg: #3d3d3d;
+$light-bg: #404040;
 $purp-bg : #6e5b6e;
 
 
@@ -21,13 +21,13 @@ body{
 header{
     grid-column:  1/13;
     height: 5vh;
-    border-bottom: 1px solid white;
+    color: white
     
 }
 
 nav{
     grid-column: 1/2;
-    border-right: 1px solid white;
+    
     
     padding: 20px;
     min-height: 90vh;
@@ -56,11 +56,15 @@ nav{
 main{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap:10px;
     grid-column: 2/13;
     padding: 10px;
     background-color: $secondary-bg;
     
+}
+main h2{
+    
+    height: 10vh;
 }
 .proj_nav_container{
     display: flex;
@@ -172,15 +176,7 @@ main{
 }
 .task_card{
     
-    box-shadow: 0 1px 2px rgb(72, 72, 72);
-    border-radius: 15px;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    align-items: center;
-    color:white;
-    font-size: 1.2rem;
-    gap: 10px;
+    background-color: $light-bg;
     
        
 }

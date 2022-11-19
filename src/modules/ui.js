@@ -28,6 +28,8 @@ const buildNav = () => {
     const nav = document.createElement('nav')
     const taskButtonContainer = document.createElement('div')
     taskButtonContainer.classList.add('nav-buttons')
+
+    
     const completeTasks = document.createElement('button')
     completeTasks.innerText = 'finished'
     completeTasks.id ='completed-tasks'

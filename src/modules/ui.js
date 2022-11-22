@@ -90,7 +90,7 @@ const buildTaskForm = (event) => {
     nameInput.classList.add('task-inpt')
     nameInput.placeholder = "Title"
 
-    const descInput = document.createElement('input');
+    const descInput = document.createElement('textarea');
     descInput.setAttribute('type','text')
     descInput.setAttribute('name','desc')
     descInput.setAttribute('id','desc_input')

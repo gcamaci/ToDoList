@@ -2,6 +2,7 @@ import {CategoryFactory,TaskFactory } from "./factory";
 import { toggleModal } from "./Modal";
 import {createNavButton,giveDomInpts,buildTaskElement } from "./ui";
 import { storeProject,localProjects,saveProjectList} from "./storage";
+import { LibManifestPlugin } from "webpack";
 
 
 
@@ -42,6 +43,11 @@ const displayTasks = () => {
         taskContainer.appendChild(taskElement);
         
     })
+    /*
+    if(currentProject.taskStorage.length === 0){
+        category.innerText = 'Not all who wander are lost'
+    
+    }*/
     
     const taskButtons = document.querySelectorAll('.task_Btn')
     taskButtons.forEach((btn) =>{

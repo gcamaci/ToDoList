@@ -20,17 +20,21 @@ body{
 
 header{
     grid-column:  1/13;
-    height: 5vh;
-    color: white
+    height: 10vh;
+    color: white;
+    position: sticky;
+    top: 0;
+    
+
     
 }
 
 nav{
     grid-column: 1/2;
-    
-    
-    padding: 20px;
-    min-height: 90vh;
+    position: sticky;
+    top: 10vh;
+    height: 80vh;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -63,8 +67,11 @@ main{
     
 }
 main h2{
+    background-color: #C0E39E;
     
-    height: 10vh;
+    display: flex;
+    align-items: center;
+    padding: 10px;
 }
 .proj_nav_container{
     display: flex;
@@ -99,8 +106,9 @@ main h2{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    height: 10vh;
+    border-radius: 25px;
     width: 600px;
+    background-color: white;
     --webkit-animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     
@@ -142,7 +150,8 @@ main h2{
     color: white;
     box-shadow: 0px 0px 1px 1px black;
     font-size: 20px;
-    align-self: center;
+    
+    position: absolute;
 }
 #task_Modal{
     display: flex;
@@ -152,7 +161,7 @@ main h2{
     
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 1px 1px 3px black;
+    
     align-items: center;
     
     
@@ -175,12 +184,21 @@ main h2{
     box-shadow: 1px 1px 3px black;
 }
 .task_card{
-    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     background-color: $light-bg;
+    min-height: 75px;
+    max-height: 100px;
     
        
 }
-
+.task-description{
+    width: 45%;
+    height: 75px;
+    overflow: hidden;
+    align-self: center;
+}
 .task-btn-container{
     display: flex;
     justify-content: flex-end;

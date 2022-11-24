@@ -2,6 +2,10 @@ import {addProject,toggleProject,addTaskToProj,displayProjects,displayTasks,allT
 //import { addTaskToProj } from "./tasks";
 import { toggleModal,displayForms } from "./Modal";
 import { localProjects } from "./storage";
+import add from '../icons/add.png'
+import pencil from '../icons/pencil.png'
+import favorite from '../icons/favorite.png'
+import trash from '../icons/trash.png'
 
 const buildHeader = () => {
     const header = document.createElement('header');
@@ -215,10 +219,11 @@ const buildTaskElement = (name,desc,date,code,status) => {
 
     
     const edit = document.createElement('button')
-    edit.innerText='Edit'
+    
     edit.dataset.taskId = code
     edit.name = 'Edit'
     edit.id = 'edit-task'
+    edit.style.backgroundImage = `url(${pencil})`
     edit.classList.add('task_Btn')
     edit.addEventListener("click",editTask)
         
@@ -227,7 +232,7 @@ const buildTaskElement = (name,desc,date,code,status) => {
     taskBtnContainer.classList.add('task-btn-container')
 
     const deleteTask = document.createElement('button')
-    deleteTask.innerText = 'Delete'
+    deleteTask.style.backgroundImage = `url(${trash})`
     deleteTask.dataset.taskId = code 
     deleteTask.classList.add('task_Btn')
     deleteTask.classList.add('delete-btn')
@@ -238,7 +243,7 @@ const buildTaskElement = (name,desc,date,code,status) => {
     markComplete.dataset.taskId = code
     markComplete.classList.add('task_Btn')
     markComplete.name = 'Status'
-    markComplete.innerText = 'Status'
+    markComplete.style.backgroundImage = `url(${favorite})`
     markComplete.classList.add('status-btn')
     
     if(status===true){

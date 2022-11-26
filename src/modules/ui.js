@@ -6,13 +6,21 @@ import add from '../icons/add.png'
 import pencil from '../icons/pencil.png'
 import favorite from '../icons/favorite.png'
 import trash from '../icons/trash.png'
+import tasks from '../icons/tasks.svg'
+import ticket from '../icons/ticket.svg'
+
+import code from '../icons/code.svg'
 
 const buildHeader = () => {
     const header = document.createElement('header');
     const title = document.createElement('h1');
     title.innerText = 'To-Do App'
 
-    header.appendChild(title)
+    const addModal = document.createElement('button')
+    addModal.innerText = 'New Task'
+    addModal.id = 'open_Modal'
+    addModal.addEventListener('click',toggleModal)
+    header.append(title,addModal)
     return header 
 }
 
@@ -33,47 +41,43 @@ const buildNav = () => {
     const taskButtonContainer = document.createElement('div')
     taskButtonContainer.classList.add('nav-buttons')
 
-    
+   
     const completeTasks = document.createElement('button')
-    completeTasks.innerText = 'finished'
+    completeTasks.style.backgroundImage = `url(${favorite})`
     completeTasks.id ='completed-tasks'
     completeTasks.addEventListener('click',allTasks);
+    
 
     const allTaskBtn = document.createElement('button');
-    allTaskBtn.innerText = "All Tasks"
+    allTaskBtn.style.backgroundImage = `url(${tasks})`
     allTaskBtn.id = 'all-tasks'
     allTaskBtn.addEventListener('click',allTasks)
-    //taskButtonContainer.append(allTaskBtn,completeTasks)
+    
+    const codeProj = document.createElement('button')
+    codeProj.style.backgroundImage = `url(${code})`
+    codeProj.dataset.project = 'Coding'
+    codeProj.addEventListener('click',toggleProject)
+
     const projectMain = document.createElement('div')
     projectMain.classList.add('main-project-container')
-    //project buttons contain
+    
     
     const projectContainer = document.createElement('div')
     const title = document.createElement('h3')
     title.innerText = 'Projects'
     projectMain.append(title,projectContainer)
     projectContainer.classList.add('proj_nav_container');
-    
-    const addModal = document.createElement('button')
-    addModal.innerText = '+'
-    addModal.id = 'open_Modal'
-    addModal.addEventListener('click',toggleModal)
-
-    const codeProj = document.createElement('button')
-    codeProj.innerText = 'Code'
-    codeProj.dataset.project = 'Coding'
-    codeProj.addEventListener('click',toggleProject)
-
+  
     const workProj = document.createElement('button')
-    workProj.innerText = 'Work'
+    workProj.style.backgroundImage = `url(${ticket})`
     workProj.dataset.project = 'Work'
     workProj.addEventListener('click',toggleProject)
 
-    const navBtns = [allTaskBtn,completeTasks,codeProj,workProj]
+    const navBtns = [allTaskBtn,codeProj,completeTasks,workProj]
     navBtns.forEach((btn)=>{
         btn.classList.add('nav_btn')
     })
-    taskButtonContainer.append(allTaskBtn,completeTasks,codeProj,workProj,addModal)
+    taskButtonContainer.append(allTaskBtn,completeTasks,codeProj,workProj)
     nav.append(taskButtonContainer,projectMain)
 
     return nav

@@ -2,20 +2,19 @@ import {addProject,toggleProject,addTaskToProj,displayProjects,displayTasks,allT
 //import { addTaskToProj } from "./tasks";
 import { toggleModal,displayForms } from "./Modal";
 import { localProjects } from "./storage";
-import add from '../icons/add.png'
+
 import pencil from '../icons/pencil.png'
 import favorite from '../icons/favorite.png'
+import star from '../icons/starWhite.svg'
 import trash from '../icons/trash.png'
-import tasks from '../icons/tasks.svg'
-import ticket from '../icons/ticket.svg'
 
-import code from '../icons/code.svg'
+import ticket from '../icons/ticketWhite.svg'
+import code from '../icons/codeWhite.svg'
 
 const buildHeader = () => {
     const header = document.createElement('header');
     const title = document.createElement('h1');
-    title.innerText = 'To-Do App'
-
+    title.innerText = 'To-Do App';
     const addModal = document.createElement('button')
     addModal.innerText = 'New Task'
     addModal.id = 'open_Modal'
@@ -29,6 +28,7 @@ const createNavButton = (name) => {
     projButton.classList.add('proj-btn-hover')
     projButton.innerText = name
     projButton.dataset.project = name
+    
     return projButton
 }
 
@@ -43,18 +43,17 @@ const buildNav = () => {
 
    
     const completeTasks = document.createElement('button')
-    completeTasks.style.backgroundImage = `url(${favorite})`
     completeTasks.id ='completed-tasks'
     completeTasks.addEventListener('click',allTasks);
     
 
     const allTaskBtn = document.createElement('button');
-    allTaskBtn.style.backgroundImage = `url(${tasks})`
+    
     allTaskBtn.id = 'all-tasks'
     allTaskBtn.addEventListener('click',allTasks)
     
     const codeProj = document.createElement('button')
-    codeProj.style.backgroundImage = `url(${code})`
+    codeProj.id = 'codeBtn'
     codeProj.dataset.project = 'Coding'
     codeProj.addEventListener('click',toggleProject)
 
@@ -69,9 +68,11 @@ const buildNav = () => {
     projectContainer.classList.add('proj_nav_container');
   
     const workProj = document.createElement('button')
-    workProj.style.backgroundImage = `url(${ticket})`
+    workProj.id = 'workBtn'
     workProj.dataset.project = 'Work'
     workProj.addEventListener('click',toggleProject)
+
+
 
     const navBtns = [allTaskBtn,codeProj,completeTasks,workProj]
     navBtns.forEach((btn)=>{
@@ -126,7 +127,6 @@ const buildTaskForm = (event) => {
     project.id = 'project_Assign'
     project.classList.add('task-inpt')
     
-    
 
     const submit = document.createElement('button');
     submit.setAttribute('id','task_submit')
@@ -134,7 +134,18 @@ const buildTaskForm = (event) => {
     submit.innerText = 'Add'
     submit.addEventListener('click',addTaskToProj)
 
-    form.append(title,nameInput,descInput,dateInput,project,submit);
+
+    const textForm = document.createElement('div')
+    textForm.classList.add('text-form')
+    textForm.append(nameInput,descInput)
+
+    const optForm = document.createElement('div')
+    optForm.classList.add('opt-form')
+    optForm.append(dateInput,project)
+    const entry = document.createElement('div')
+    entry.classList.add('entry-container')
+    entry.append(textForm,optForm)
+    form.append(title,entry,submit);
 
     return form
 }
@@ -165,7 +176,8 @@ const buildModal = () => {
 
     const nav = document.createElement('div')
     nav.id = 'master_Modal_Nav'
- 
+    
+    const modalBtns = document.createElement('div')
     const project = document.createElement('button')
     project.id = 'new_Project'
     project.innerText = 'Project'
@@ -185,10 +197,10 @@ const buildModal = () => {
     closeOut.innerText = 'X'
     closeOut.addEventListener('click',toggleModal)
     closeOut.classList.add('close-modal')
-
-    nav.append(project,todo)
+    modalBtns.append(project,todo)
+    nav.append(modalBtns,closeOut)
     modal.append(nav,formContainer)
-    mainContainer.append(modal,closeOut)
+    mainContainer.append(modal)
 
     return mainContainer
 
@@ -212,14 +224,22 @@ const buildTaskElement = (name,desc,date,code,status) => {
     taskCard.dataset.taskCode = `${code}`
 
     const title = document.createElement('div')
-    title.innerText = name
+    title.classList.add('title-container')
+    const titleTag = document.createElement('h3')
+    titleTag.innerText = name
+    title.appendChild(titleTag)
+    
 
     const description = document.createElement('div')
-    description.innerText = desc
+    const descriptionTag = document.createElement('p')
+    descriptionTag.innerText = desc
     description.classList.add('task-description')
+    description.appendChild(descriptionTag)
 
-    const dueDate = document.createElement('div')
-    dueDate.innerText = date
+    //const dueDate = document.createElement('div')
+    const dateTag = document.createElement('p')
+    dateTag.innerText = date
+    title.appendChild(dateTag)
 
     
     const edit = document.createElement('button')
@@ -266,7 +286,6 @@ const buildTaskElement = (name,desc,date,code,status) => {
     taskCard.append(
         title,
         description,
-        dueDate,
         taskBtnContainer
 
     )

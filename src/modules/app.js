@@ -184,7 +184,7 @@ const addTaskToProj = (event) =>{
                 console.log(project.taskStorage)
             }
         });
-
+        console.log(DOM.taskDate.value)
     }
 
     saveProjectList()

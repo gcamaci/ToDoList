@@ -103,6 +103,7 @@ main h2{
     display: flex;
     align-items: center;
     padding: 20px;
+    border-radius: 0px 0px 10px 10px
     
 
 }
@@ -138,12 +139,15 @@ main h2{
 #master_Modal{
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 30px;
     background-color: white;
     --webkit-animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     background-color: $dark-background;
-
+    color: white;
+    border-radius: 10px;
+    gap:10px;
+    min-width: 300px;
 
 }
 
@@ -152,23 +156,25 @@ main h2{
     width: 100px;
     height: 30px;
     border-radius: 2px;
-    background-color: transparent;
-    border: 3px solid $accent-color;
-    color: white;
-    box-shadow: 0 0 3px $accent-color;
+    
+    border: none;
+    color: black;
+    background-color: $accent-color;
     padding: 5px;
     
     
     
 }
 .close-modal{
-    width: 50px;
-    height: 50px;
+    width: 25px;
+    height: 25px;
+    background-image: url(icons/cross-circle.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     border: none;
-    border-radius: 25px;
-    background-color: red;
-    color: white;
-    box-shadow: 0px 0px 1px 1px black;
+    background-color: transparent;
+    
     font-size: 20px;
     
     
@@ -176,9 +182,26 @@ main h2{
 #master_Modal_Nav{
     display:flex;
     justify-content: space-between;
+    
 }
+.modal-btn-container{
+    display: flex;
+    gap: 15px;
 
-
+}
+.modal-btn{
+    width: 75px;
+    background-color: $secondary-bg;
+    border:none;
+    border: 2px solid $accent-color;
+    color: white;
+    border-radius: 25px;
+}
+.project_modal{
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
 #task_Modal{
     display: flex;
     flex-direction: column;
@@ -192,7 +215,7 @@ main h2{
 } 
 .entry-container{
     display: flex;
-    gap: 50px;
+    gap: 25px;
     
     
 }
@@ -210,10 +233,18 @@ main h2{
 }
 .task-inpt{
     width: 300px;
-    background-color: $secondary-bg;
+    background-color: $light-bg;
     border: none;
-    
-
+    padding: 5px;
+    color: white;
+    outline: none;
+    border-radius: 5px;
+}
+::placeholder{
+    color: white;
+}
+.task-inpt:focus{
+    border: 1px solid $accent-color;
 }
 #name_input{
     height: 30px;
@@ -225,15 +256,24 @@ main h2{
     height: 30px;
     color: rgb(104, 100, 100);
 }
+#proj_Name_Inpt{
+  border:none; 
+  background-color: $light-bg; 
+}
 #project_Assign{
     height:30px;
+    width: 75px;
+}
+#add_Proj_Button{
     width: 50px;
+    background-color: $accent-color;
+    border: none;
 }
 #task_submit{
-    width: 50px;
+    width: 75px;
     padding: 5px;
     border: none;
-    background-color: green;
+    background-color: $accent-color;
     border-radius: 15px;
     box-shadow: 1px 1px 3px black;
 }
@@ -248,7 +288,7 @@ main h2{
     margin-right: 10px;
     margin-left: 10px;
     height: 100px;
-    gap: 5px;
+    
     background-color: #404040;
     line-height: 1.3em;
     

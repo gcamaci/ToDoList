@@ -5,11 +5,9 @@ import { localProjects } from "./storage";
 
 import pencil from '../icons/pencil.png'
 import favorite from '../icons/favorite.png'
-import star from '../icons/starWhite.svg'
 import trash from '../icons/trash.png'
 
-import ticket from '../icons/ticketWhite.svg'
-import code from '../icons/codeWhite.svg'
+
 
 const buildHeader = () => {
     const header = document.createElement('header');
@@ -112,6 +110,7 @@ const buildTaskForm = (event) => {
     dateInput.setAttribute('id','date_input');
     dateInput.classList.add('task-inpt')
     
+    
 
     const project = document.createElement('select');
     localProjects.forEach((proj)=>{
@@ -178,14 +177,17 @@ const buildModal = () => {
     nav.id = 'master_Modal_Nav'
     
     const modalBtns = document.createElement('div')
+    modalBtns.classList.add('modal-btn-container')
     const project = document.createElement('button')
     project.id = 'new_Project'
+    project.classList.add('modal-btn')
     project.innerText = 'Project'
     project.addEventListener('click',displayForms)
 
     const todo = document.createElement('button')
     todo.id = 'new_Task';
     todo.innerText = 'Task'
+    todo.classList.add('modal-btn')
     todo.addEventListener('click',displayForms)
 
     const formContainer = document.createElement('div')
@@ -194,7 +196,7 @@ const buildModal = () => {
     formContainer.appendChild(firstForm)
 
     const closeOut = document.createElement('button')
-    closeOut.innerText = 'X'
+    
     closeOut.addEventListener('click',toggleModal)
     closeOut.classList.add('close-modal')
     modalBtns.append(project,todo)

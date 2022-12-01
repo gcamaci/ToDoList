@@ -1,4 +1,4 @@
-import {addProject,toggleProject,addTaskToProj,displayProjects,displayTasks,allTasks,editTask} from "./app";
+import {addProject,toggleProject,addTaskToProj,displayTasks,allTasks,editTask, projDrop} from "./app";
 //import { addTaskToProj } from "./tasks";
 import { toggleModal,displayForms } from "./Modal";
 import { localProjects } from "./storage";
@@ -43,33 +43,49 @@ const buildNav = () => {
     const completeTasks = document.createElement('button')
     completeTasks.id ='completed-tasks'
     completeTasks.addEventListener('click',allTasks);
-    
+    completeTasks.innerText = 'Favorites'
 
     const allTaskBtn = document.createElement('button');
-    
+    allTaskBtn.innerText = 'All Tasks'
     allTaskBtn.id = 'all-tasks'
     allTaskBtn.addEventListener('click',allTasks)
     
     const codeProj = document.createElement('button')
     codeProj.id = 'codeBtn'
     codeProj.dataset.project = 'Coding'
-    codeProj.addEventListener('click',toggleProject)
+    codeProj.addEventListener('click',toggleProject);
+    codeProj.innerText = 'Code'
 
     const projectMain = document.createElement('div')
     projectMain.classList.add('main-project-container')
     
     
     const projectContainer = document.createElement('div')
+    const titleContainer = document.createElement('div');
+    titleContainer.classList.add('proj-nav-title')
     const title = document.createElement('h3')
     title.innerText = 'Projects'
-    projectMain.append(title,projectContainer)
-    projectContainer.classList.add('proj_nav_container');
+    const expandBtn = document.createElement('button')
+    expandBtn.type = 'button'
+    expandBtn.id = 'expand'
+    expandBtn.addEventListener('click',projDrop)
+    titleContainer.append(title,expandBtn)
+    projectMain.append(titleContainer,projectContainer)
+
+    projectContainer.classList.add('proj_nav_container','hide');
+    projectContainer.id = 'proj_container'
+    localProjects.forEach((project)=>{
+        let newNavBtn = createNavButton(project.name);
+        newNavBtn.addEventListener('click',toggleProject);
+        projectContainer.appendChild(newNavBtn);
+        
+    });
   
     const workProj = document.createElement('button')
     workProj.id = 'workBtn'
     workProj.dataset.project = 'Work'
     workProj.addEventListener('click',toggleProject)
-
+    workProj.innerText = 'Work'
 
 
     const navBtns = [allTaskBtn,codeProj,completeTasks,workProj]
@@ -306,7 +322,6 @@ const loadpage = () =>{
     //add footer
     document.body.append(header,nav,main,footer)
     
-    displayProjects()
     displayTasks()
 };
 //

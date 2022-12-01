@@ -2,24 +2,30 @@ import {CategoryFactory,TaskFactory } from "./factory";
 import { toggleModal } from "./Modal";
 import {createNavButton,giveDomInpts,buildTaskElement } from "./ui";
 import { storeProject,localProjects,saveProjectList} from "./storage";
-import telescope from "../icons/telescope.png"
 
 
 
 
+let navState = false
 let currentProject = localProjects[1]
 
 
-const  displayProjects = () =>{
-    const container = document.querySelector('.proj_nav_container')
-    container.innerHTML = ''
-    localProjects.forEach((project)=>{
-        let newNavBtn = createNavButton(project.name);
-        newNavBtn.addEventListener('click',toggleProject);
-        container.appendChild(newNavBtn);
+const projDrop = () => { 
+    const container = document.getElementById('proj_container')
+    console.log(container)
+    
+    if(navState === false){
+        container.classList.remove('hide')
+        container.classList.add('show')
+        navState = !navState;
+        console.log(navState)
         
-    });
-    console.log(localProjects)
+    }else{
+        container.classList.remove('show')
+        container.classList.add('hide')
+        navState = !navState
+        console.log(navState)
+    }
     
 }
 //create Task Dom, display Task Dom, and add event listeners
@@ -45,12 +51,20 @@ const displayTasks = () => {
     })
     
     if(currentProject.taskStorage.length === 0){
-        category.innerText = 'Not all who wander are lost'
-        taskContainer.style.backgroundImage = `url(${telescope})`;
-        
-    
-    
+        const freshMessageContainer = document.createElement('div');
+        const freshMessage = document.createElement('h1')
+        freshMessage.innerText = 'Those who wander are not lost'
+
+        const imageContainer = document.createElement('div')
+        imageContainer.classList.add('fresh-image')
+
+        freshMessageContainer.append(freshMessage,imageContainer)
+        freshMessageContainer.classList.add('fresh-container')
+        taskContainer.appendChild(freshMessageContainer)
+        console.log(taskContainer.style.backgroundImage)
     }
+
+
     const taskButtons = document.querySelectorAll('.task_Btn')
     taskButtons.forEach((btn) =>{
         btn.addEventListener('click',taskListeners)
@@ -193,11 +207,13 @@ const addTaskToProj = (event) =>{
 }
 //adds Project to projects array
 const addProject = () => {
+    const projContainer = document.getElementById('proj_container')
     const projInput = document.getElementById('proj_Name_Inpt');
     let newProject = CategoryFactory(projInput.value);
-    storeProject(newProject)
-    displayProjects()
+    storeProject(newProject)    
     toggleModal()
+    let newProjDom = createNavButton(newProject.name)
+    projContainer.appendChild(newProjDom)
     projInput.value = ''
 
     
@@ -259,9 +275,10 @@ function taskStatus(code){
 export {
     addProject,
     addTaskToProj,
-    displayProjects,
+    //displayProjects,
     displayTasks,
     allTasks,
     editTask,
     toggleProject,
+    projDrop
 }

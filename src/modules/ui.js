@@ -11,13 +11,20 @@ import trash from '../icons/trash.png'
 
 const buildHeader = () => {
     const header = document.createElement('header');
+    const headTitleContainer = document.createElement('div')
+
     const title = document.createElement('h1');
     title.innerText = 'To-Do App';
+    const logoImg = document.createElement('div')
+    logoImg.classList.add('logo-img')
+
+    headTitleContainer.append(logoImg,title)
+    headTitleContainer.classList.add('head-title-container')
     const addModal = document.createElement('button')
     addModal.innerText = 'New Task'
     addModal.id = 'open_Modal'
     addModal.addEventListener('click',toggleModal)
-    header.append(title,addModal)
+    header.append(headTitleContainer,addModal)
     return header 
 }
 

@@ -7,5 +7,5 @@ loadpage()
 
 
 
-//console.log(localStorage)
+
 

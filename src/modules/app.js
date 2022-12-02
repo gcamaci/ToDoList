@@ -28,6 +28,7 @@ const projDrop = () => {
     }
     
 }
+const formatTitle = str => str.charAt(0).toUpperCase()+str.slice(1)
 //create Task Dom, display Task Dom, and add event listeners
 //display Tasks and All tasks should be made into one single function,for better re-usability
 const displayTasks = () => {
@@ -38,11 +39,14 @@ const displayTasks = () => {
     category.innerText = currentProject.name;
     taskContainer.appendChild(category)
     currentProject.taskStorage.forEach((task)=>{
-        console.log(task.idCode)
+        let date= task.date.replaceAll('-', ',')
+        let name = formatTitle(task.name)
+        let formatDate = format(new Date(date),'MMM do, yy')
+        console.log(formatDate)
         let taskElement = buildTaskElement(
-            task.name,
+            name,
             task.desc,
-            task.date,
+            formatDate,
             task.idCode,
             task.status
         )
@@ -115,12 +119,8 @@ const getAllTasks = () =>{
 }
 
 const allTasks = (event) =>{
-    let taskArray = [];
-    localProjects.forEach((project) =>{
-        taskArray.push(project.taskStorage)
-    })
-    //combines all arrays inside taskArray into one single array
-    taskArray = taskArray.flat(1)
+    let taskArray = getAllTasks();
+   
 
     if(event.target.id === "completed-tasks"){
         const finishedTasks = CategoryFactory('Completed Tasks')
@@ -162,12 +162,14 @@ const updateTask = (code) => {
     const taskArray = getAllTasks();
     const oldTask = taskArray.find(task => task.idCode == code)
     const DOM = giveDomInpts()
+
+
     localProjects.forEach(project => {
         if(project.name === oldTask.category){
             const index = project.taskStorage.findIndex(todo=>todo.idCode == code)
             project.taskStorage[index].name = DOM.taskName.value
             project.taskStorage[index].desc = DOM.taskDesc.value
-            project.taskStorage[index].category = DOM.taskCategory.value
+            //project.taskStorage[index].category = DOM.taskCategory.value
             project.taskStorage[index].date = DOM.taskDate.value
         }
     });

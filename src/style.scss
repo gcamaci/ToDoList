@@ -212,14 +212,14 @@ main h2{
     width: 100px;
     height: 30px;
     border-radius: 2px;
-    
     border: none;
     color: black;
     background-color: $accent-color;
-    padding: 5px;
-    
-    
-    
+    padding: 5px; 
+}
+
+#open_Modal:hover{
+    background-color: #9ab57f;
 }
 .fresh-container{
     width: 100%;
@@ -254,8 +254,12 @@ main h2{
     background-color: transparent;
     
     font-size: 20px;
+    transition: all 0.2s ease-in-out;
+    transform: scale(1);
     
-    
+}
+.close-modal:hover{
+    transform: scale(1.2);
 }
 #master_Modal_Nav{
     display:flex;
@@ -274,6 +278,12 @@ main h2{
     border: 2px solid $accent-color;
     color: white;
     border-radius: 25px;
+    transition: all 0.2s ease-in-out;
+    transform: scale(1);
+
+}
+.modal-btn:hover{
+    transform: scale(1.05);
 }
 .project_modal{
     display: flex;
@@ -357,7 +367,7 @@ main h2{
 }
 .task_card{
     display: grid;
-    grid-template-columns: 100px 1fr 1fr 30px;
+    grid-template-columns: 150px 1fr 1fr 30px;
     grid-template-rows: 1fr,1fr;
     
     color: rgb(255, 255, 255);

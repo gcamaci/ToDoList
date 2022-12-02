@@ -2,7 +2,7 @@ import {CategoryFactory,TaskFactory } from "./factory";
 import { toggleModal } from "./Modal";
 import {createNavButton,giveDomInpts,buildTaskElement } from "./ui";
 import { storeProject,localProjects,saveProjectList} from "./storage";
-
+import {format} from 'date-fns'
 
 
 
@@ -38,7 +38,7 @@ const displayTasks = () => {
     category.innerText = currentProject.name;
     taskContainer.appendChild(category)
     currentProject.taskStorage.forEach((task)=>{
-        //console.log(task.idCode)
+        console.log(task.idCode)
         let taskElement = buildTaskElement(
             task.name,
             task.desc,

@@ -1,4 +1,4 @@
-import {addProject,toggleProject,addTaskToProj,displayTasks,allTasks,editTask, projDrop} from "./app";
+import {addProject,toggleProject,addTaskToProj,displayTasks,editTask, projDrop} from "./app";
 //import { addTaskToProj } from "./tasks";
 import { toggleModal,displayForms } from "./Modal";
 import { localProjects } from "./storage";
@@ -49,14 +49,17 @@ const buildNav = () => {
    
     const completeTasks = document.createElement('button')
     completeTasks.id ='completed-tasks'
-    completeTasks.addEventListener('click',allTasks);
+    completeTasks.addEventListener('click',toggleProject);
     completeTasks.innerText = 'Favorites'
+    completeTasks.dataset.project = 'Favorites'
 
     const allTaskBtn = document.createElement('button');
     allTaskBtn.innerText = 'All Tasks'
     allTaskBtn.id = 'all-tasks'
-    allTaskBtn.addEventListener('click',allTasks)
-    
+    allTaskBtn.addEventListener('click',toggleProject)
+    allTaskBtn.dataset.project = 'All'
+
+
     const codeProj = document.createElement('button')
     codeProj.id = 'codeBtn'
     codeProj.dataset.project = 'Coding'

@@ -332,7 +332,7 @@ const loadpage = () =>{
     //add footer
     document.body.append(header,nav,main,footer)
     
-    displayTasks()
+    //displayTasks()
 };
 //
 export{

@@ -1,10 +1,8 @@
 
 import { CategoryFactory,TaskFactory } from "./factory";
 
-const Gym = CategoryFactory('Gym'); 
 
 const Coding = CategoryFactory('Coding')
-
 const Work = CategoryFactory('Work')
 const task1 = TaskFactory('Finish UI',"Finish Styling UI","09/18/2022","Coding");
 const task2 = TaskFactory('add Edit Task Button',"Add edit task button to task cards","09/18/2022","Coding");
@@ -14,7 +12,7 @@ Coding.taskStorage.push(task1)
 Coding.taskStorage.push(task2)
 Coding.taskStorage.push(task3)
 Coding.taskStorage.push(task4)
-let projects = [Gym,Coding,Work]
+let projects = [Coding,Work]
 
 
 const initialStorage = (() => {

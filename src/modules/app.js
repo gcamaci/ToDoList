@@ -119,17 +119,17 @@ const getAllTasks = () =>{
 }
 
 
-const activeBtn = () => {
-    const navBtns = document.querySelectorAll('.nav_btns')
+const activeBtn = (str) => {
+    const navBtns = document.querySelectorAll('.nav_btn')
     navBtns.forEach((btn)=>{
-        console.log(btn.dataset.project)
+        btn.dataset.project===str ? btn.classList.add('active') : btn.classList.remove('active')
     })
 }
 const toggleProject = (event) =>{
+    const key = event.target.dataset.project
     let taskArray = getAllTasks();
-    const navBtns = document.querySelectorAll('.nav_btns')
-    activeBtn()
-    if(event.target.dataset.project === "Favorites"){
+    activeBtn(key)
+    if(key === "Favorites"){
         const finishedTasks = CategoryFactory('Completed Tasks')
         taskArray.forEach((task)=>{
             if(task.status===true){
@@ -137,14 +137,14 @@ const toggleProject = (event) =>{
             }
         })
         currentProject = finishedTasks
-    }else if(event.target.dataset.project === 'All'){
+    }else if(key === 'All'){
         const newProj = CategoryFactory('All Tasks')
         newProj.taskStorage = taskArray
         currentProject = newProj;
 
     }else{
         localProjects.forEach((project)=>{
-            if(project.name === event.target.dataset.project){
+            if(project.name === key){
                 currentProject = project
             }
         })

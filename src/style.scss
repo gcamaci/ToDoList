@@ -2,6 +2,7 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+    font-family: 'MyFont';
 }
 $dark-background:#1f1f1e;
 $secondary-bg: #242624;
@@ -10,6 +11,15 @@ $accent-color: #C0E39E;
 $light-bg: #404040;
 $purp-bg : #6e5b6e;
 
+
+
+@font-face {
+    font-family: 'MyFont';
+    src: url('./robto.ttf') format('ttf'),
+      url('./robto.ttf') format('ttf');
+    font-weight: 600;
+    font-style: normal;
+  }
 
 
 body{
@@ -31,6 +41,7 @@ header{
     align-items: center;
     background-color: $dark-background;
     z-index: 3;
+    font-family: 'MyFont';
 }
 .head-title-container{
     display: flex;
@@ -69,6 +80,7 @@ nav{
 
 }
 
+
 .nav_btn{
     flex-grow: 1;
     width: 100%;
@@ -90,22 +102,25 @@ nav{
     transform :scale(1.05);
     background-color: $light-bg;
     color: $accent-color;
-    
-    
-    
+  
 }
-
+.active{
+    box-shadow: 2px 0px 0px 0px rgba(192,227,158,0.75);
+    transform :scale(1.05);
+    background-color: $light-bg;
+    color: $accent-color;
+}
 
 main{
     display: flex;
     flex-direction: column;
-    
+   
     grid-column: 2/13;
     gap:10px;
     background-color: $secondary-bg;
-    background-position: center;
-    background-repeat: no-repeat ;
-    border-radius: 5px;
+    
+    
+    border-radius: 15px 0px 0px 0px;
     
 
     
@@ -365,6 +380,9 @@ main h2{
     border-radius: 15px;
     box-shadow: 1px 1px 3px black;
 }
+#task_submit:hover{
+    background-color: #9ab57f;
+}
 .task_card{
     display: grid;
     grid-template-columns: 150px 1fr 1fr 30px;
@@ -424,8 +442,13 @@ main h2{
     background-position: center;
     background-repeat: no-repeat;
     border: none;
+    transition: all 0.5s ease-in-out;
+    transform: scale(1);
     
 
+}
+.task_Btn:hover{
+    transform: scale(1.5);
 }
 .task-status-red{
     background-color:none;
